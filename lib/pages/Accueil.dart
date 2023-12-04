@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'Login.dart';
 import 'CarteVins.dart';
+import 'Scanner.dart';
+import 'Settings.dart';
+import 'Login.dart';
 
 
 // page d'ACCUEIL
@@ -33,7 +35,7 @@ class Home extends StatelessWidget {
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("wallpaper_accueil.jpg"),
+              image: AssetImage("wallpaper_accueil_2.jpg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -80,7 +82,11 @@ class Home extends StatelessWidget {
                   // Buttton => Scanner
                   ElevatedButton.icon(
                     onPressed: () {
-                      // Action à effectuer lors du clic sur le bouton
+                      // Action à effectuer lors du clic sur le bouton => passer à l'écran de scanner
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Scanner()),
+                      );
                     },
                     icon: Icon(Icons.qr_code),
                     label: const Text('Scanner',
@@ -100,7 +106,11 @@ class Home extends StatelessWidget {
                   // Buttton => Settings
                   ElevatedButton.icon(
                     onPressed: () {
-                      // Action à effectuer lors du clic sur le bouton
+                      // Action à effectuer lors du clic sur le bouton => passer à l'écran de settings
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Settings()),
+                      );
                     },
                     icon: Icon(Icons.settings),
                     label: const Text('Settings',
