@@ -165,24 +165,3 @@ List<Commentaire> commentaires = [
     );
   }
 }
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DetailsVin({
-        'couleur': 'rouge',
-        'titre': 'Château Margaux',
-        'type': 'Vin Rouge',
-        'cepage': 'Cabernet Sauvignon',
-        'annee': '2015',
-        'note': 4.8,
-        'prix': '120 \$',
-      }),
-    );
-  }
-}
