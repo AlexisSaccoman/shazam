@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Login.dart';
+import 'CarteVins.dart';
 
 
 // page d'ACCUEIL
@@ -55,7 +56,11 @@ class Home extends StatelessWidget {
                   // Buttton => Carte des vins
                   ElevatedButton.icon(
                     onPressed: () {
-                      // Action à effectuer lors du clic sur le bouton
+                      // Action à effectuer lors du clic sur le bouton => passer à l'écran de la carte des vins
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CarteVins()),
+                      );
                     },
                     icon: Icon(Icons.wine_bar),
                     label: const Text('Wine menu',
@@ -115,7 +120,11 @@ class Home extends StatelessWidget {
                   // Buttton => Login/Resgister
                   ElevatedButton.icon(
                     onPressed: () {
-                      // Action à effectuer lors du clic sur le bouton
+                      // Action à effectuer lors du clic sur le bouton => passer à l'écran de login/register
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
                     },
                     icon: Icon(Icons.people),
                     label: const Text("Login/Register",
