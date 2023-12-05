@@ -7,14 +7,17 @@ class Commentaire {
   final String date;
   final Map<String, dynamic> utilisateur;
   final List<Commentaire> reponses;
+  final bool isAdmin;
 
   Commentaire({
     required this.message,
     required this.date,
     required this.utilisateur,
     this.reponses = const [],
+    this.isAdmin = true,
   });
 }
+
 
 class CommentairesListe extends StatelessWidget {
   final List<Commentaire> commentaires;
@@ -52,6 +55,8 @@ class CommentaireCard extends StatefulWidget {
   @override
   _CommentaireCardState createState() => _CommentaireCardState();
 }
+
+
 
 class _CommentaireCardState extends State<CommentaireCard> {
   bool showReponses = false;
@@ -92,15 +97,58 @@ class _CommentaireCardState extends State<CommentaireCard> {
               ),
             ),
             SizedBox(height: 8),
-            if (widget.commentaire.reponses.isNotEmpty)
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    showReponses = !showReponses;
-                  });
-                },
-                child: Text(showReponses ? 'Cacher Réponses' : 'Voir Réponses'),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if (widget.commentaire.isAdmin)
+                  IconButton(
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                      ),
+                    onPressed: () {
+                      // Afficher une boîte de dialogue de confirmation
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Confirmation"),
+                            content: Text("Voulez-vous supprimer ce commentaire?"),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text("Annuler"),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  // Implémentez la logique de suppression ici
+                                  // Par exemple, vous pouvez supprimer le commentaire de la liste
+                                  setState(() {
+                                    widget.commentaire.reponses.clear(); // Supprime également les réponses associées
+                                  });
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text("Supprimer"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
+                if (widget.commentaire.reponses.isNotEmpty)
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        showReponses = !showReponses;
+                      });
+                    },
+                    child: Text(showReponses ? 'Cacher Réponses' : 'Voir Réponses'),
+                  ),
+              ],
+            ),
             if (showReponses)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
