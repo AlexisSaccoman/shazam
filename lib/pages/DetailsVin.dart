@@ -30,109 +30,110 @@ class DetailsVin extends StatelessWidget {
     }
 
     // Commentaires fictifs pour l'exemple
-List<Commentaire> commentaires = [
-  Commentaire(
-    message: 'Ceci est un commentaire très intéressant.',
-    date: '15 avril 2023',
-    utilisateur: {'nom': 'Utilisateur1'},
-    reponses: [
+    List<Commentaire> commentaires = [
       Commentaire(
-        message: "Merci! Content que vous l'ayez trouvé intéressant.",
-        date: '16 avril 2023',
-        utilisateur: {'nom': 'Utilisateur4'},
-      ),
-    ],
-  ),
-  Commentaire(
-    message: 'Je préfère les vins rouges, celui-ci était excellent!',
-    date: '18 avril 2023',
-    utilisateur: {'nom': 'Utilisateur2'},
-    reponses: [
-      Commentaire(
-        message: 'Les vins rouges sont vraiment spéciaux!',
-        date: '19 avril 2023',
-        utilisateur: {'nom': 'Utilisateur5'},
-      ),
-    ],
-  ),
-  Commentaire(
-    message: 'Superbe expérience de dégustation!',
-    date: '20 avril 2023',
-    utilisateur: {'nom': 'Utilisateur3'},
-    reponses: [
-      Commentaire(
-        message: "Oui, c'était incroyable! Recommande fortement.",
-        date: '21 avril 2023',
-        utilisateur: {'nom': 'Utilisateur6'},
-      ),
-      Commentaire(
-        message: 'Quel était votre vin préféré?',
-        date: '22 avril 2023',
-        utilisateur: {'nom': 'Utilisateur7'},
+        message: 'Ceci est un commentaire très intéressant.',
+        date: '15 avril 2023',
+        utilisateur: {'nom': 'Utilisateur1'},
         reponses: [
           Commentaire(
-            message: "J'ai adoré le vin rouge!",
-            date: '23 avril 2023',
-            utilisateur: {'nom': 'Utilisateur8'},
+            message: "Merci! Content que vous l'ayez trouvé intéressant.",
+            date: '16 avril 2023',
+            utilisateur: {'nom': 'Utilisateur4'},
           ),
         ],
       ),
-    ],
-  ),
-];
-
+      Commentaire(
+        message: 'Je préfère les vins rouges, celui-ci était excellent!',
+        date: '18 avril 2023',
+        utilisateur: {'nom': 'Utilisateur2'},
+        reponses: [
+          Commentaire(
+            message: 'Les vins rouges sont vraiment spéciaux!',
+            date: '19 avril 2023',
+            utilisateur: {'nom': 'Utilisateur5'},
+          ),
+        ],
+      ),
+      Commentaire(
+        message: 'Superbe expérience de dégustation!',
+        date: '20 avril 2023',
+        utilisateur: {'nom': 'Utilisateur3'},
+        reponses: [
+          Commentaire(
+            message: "Oui, c'était incroyable! Recommande fortement.",
+            date: '21 avril 2023',
+            utilisateur: {'nom': 'Utilisateur6'},
+          ),
+          Commentaire(
+            message: 'Quel était votre vin préféré?',
+            date: '22 avril 2023',
+            utilisateur: {'nom': 'Utilisateur7'},
+            reponses: [
+              Commentaire(
+                message: "J'ai adoré le vin rouge!",
+                date: '23 avril 2023',
+                utilisateur: {'nom': 'Utilisateur8'},
+              ),
+            ],
+          ),
+        ],
+      ),
+    ];
 
     return Scaffold(
       appBar: AppBar(
         title: Text(wineData['titre']),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _buildWineCircle(couleur),
-            SizedBox(height: 16),
-            ListTile(
-              title: Text(
-                'Type: ${wineData['type']}',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _buildWineCircle(couleur),
+              SizedBox(height: 16),
+              ListTile(
+                title: Text(
+                  'Type: ${wineData['type']}',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildDetailText('Cépage: ${wineData['cepage']}'),
+                    _buildDetailText('Année: ${wineData['annee']}'),
+                  ],
+                ),
+                trailing: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Note: ${wineData['note']} / 5',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Prix: ${wineData['prix']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildDetailText('Cépage: ${wineData['cepage']}'),
-                  _buildDetailText('Année: ${wineData['annee']}'),
-                ],
-              ),
-              trailing: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Note: ${wineData['note']} / 5',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Prix: ${wineData['prix']}',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 16),
-            CommentairesListe(commentaires: commentaires),
-          ],
+              SizedBox(height: 16),
+              CommentairesListe(commentaires: commentaires),
+            ],
+          ),
         ),
       ),
     );
