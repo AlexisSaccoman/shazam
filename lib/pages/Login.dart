@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-
 class LoginPage extends StatelessWidget {
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,8 +18,8 @@ class LoginPage extends StatelessWidget {
             children: <Widget>[
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.fromLTRB(30.0, 15.0, 32.0, 20.0),
-                child: const Text(
+                padding: EdgeInsets.fromLTRB(30.0, 15.0, 32.0, 20.0),
+                child: Text(
                   "Please log in or sign up",
                   style: TextStyle(
                     fontSize: 20,
@@ -26,9 +28,10 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               // Username TextField
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
+                  controller: usernameController,
                   decoration: InputDecoration(
                     labelText: 'Username',
                     hintText: 'Enter your username',
@@ -36,9 +39,10 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               // Password TextField
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
+                  controller: passwordController,
                   obscureText: true, // Pour masquer le texte du mot de passe
                   decoration: InputDecoration(
                     labelText: 'Password',
@@ -50,10 +54,15 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Action à effectuer lors du clic sur le bouton
+                  onPressed: () async {
+                    String username = usernameController.text;
+                    String password = passwordController.text;
+
+                    // afficher le contenu des champs Username et Password dans la console
+                    print("Username: " + username);
+                    print("Password: " + password);
                   },
-                  child: const Text('Login/Register'),
+                  child: Text('Login/Register'),
                 ),
               ),
             ],
@@ -63,4 +72,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-

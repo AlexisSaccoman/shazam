@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 import 'DetailsVin.dart';
+import '../main.dart';
 
 class CarteVins extends StatelessWidget {
+
+  // on récupère les données passées en paramètre
+  final bool userConnected;
+  final bool userIsAdmin;
+
+  CarteVins({
+    required this.userConnected,
+    required this.userIsAdmin,
+  });
+
   final List<Map<String, dynamic>> vins = [
   {
     'couleur': 'blanc',
@@ -144,7 +155,6 @@ class CarteVins extends StatelessWidget {
   return Card(
     child: InkWell(
       onTap: () {
-        // Rediriger vers la page de détails du vin
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => DetailsVin(wineData)),
@@ -173,7 +183,7 @@ class CarteVins extends StatelessWidget {
                       color: Colors.grey,
                     ),
                   ),
-                  SizedBox(height: 8), // Ajout d'un espace vertical
+                  SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -184,6 +194,46 @@ class CarteVins extends StatelessWidget {
                 ],
               ),
             ),
+            if(userConnected && userIsAdmin)
+              IconButton(
+              icon: Icon(
+                Icons.delete,
+                color: Colors.red,
+                ),
+              onPressed: () {
+                // Show a confirmation dialog
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("Confirmation"),
+                      content: Text("Voulez-vous supprimer ce vin?"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text("Annuler"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Implement your deletion logic here
+                            // For example, you can remove the wine from the list
+                            // or make an HTTP request to delete it from the database
+                            // Then, you should update the UI accordingly
+                            // For simplicity, I'm just printing a message here
+                            print("Wine deleted: ${wineData['titre']}");
+                            Navigator.of(context).pop();
+                          },
+                          child: Text("Supprimer"),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+          
           ],
         ),
       ),

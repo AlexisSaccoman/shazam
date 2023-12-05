@@ -9,6 +9,16 @@ import 'Login.dart';
 
 
 class Home extends StatelessWidget {
+
+  // on récupère les données passées en paramètre
+    final bool userConnected;
+    final bool userIsAdmin;
+
+    Home({
+      required this.userConnected,
+      required this.userIsAdmin,
+    });
+
   @override
   Widget build(BuildContext context) {
 
@@ -24,6 +34,7 @@ class Home extends StatelessWidget {
 
     // space between buttons
     double spaceBetweenButtons = 20;
+
 
     return Scaffold(
       appBar: AppBar(
@@ -61,7 +72,10 @@ class Home extends StatelessWidget {
                       // Action à effectuer lors du clic sur le bouton => passer à l'écran de la carte des vins
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => CarteVins()),
+                        MaterialPageRoute(builder: (context) => CarteVins(
+                          userConnected: userConnected,
+                          userIsAdmin: userIsAdmin,
+                        )),
                       );
                     },
                     icon: Icon(Icons.wine_bar),
