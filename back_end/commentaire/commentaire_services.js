@@ -1,7 +1,7 @@
 const commentaireModel = require('./commentaire_model');
 
 class commentaireService {
-    static async addCommentaire(message, date, utilisateur, vin) {
+    static async addCommentaire(message, date, utilisateur, vin, note) {
         try {
             const _idUser = utilisateur._id;
             const pseudoUser = utilisateur.identifiant;
@@ -11,7 +11,8 @@ class commentaireService {
                 message: message,
                 date: date,
                 utilisateur: {_idUser, pseudoUser},
-                vin: { _idVin, nomVin }
+                vin: { _idVin, nomVin },
+                note : note
             });
             return await createCommentaire.save();
         } catch (err) {
@@ -26,7 +27,6 @@ class commentaireService {
                 'vin.nomVin': nom
             };
               
-
             const findCommentaire = await commentaireModel.find(query).exec(); // recherche des commentaires ayant le vin saisi dans la BDD
 
             if(findCommentaire) {
@@ -40,17 +40,34 @@ class commentaireService {
         }
     }
 
-    static async updateCommentaire(_id, message, date) {
-        const findId = await this.findCommentaireById(_id);
-        if(!findId) {
-            return "Id non trouvé !";
+    static async findCommentaireByVinNameAndUser(nom, utilisateur) {
+        try {
+            const query = {
+                'vin.nomVin': nom,
+                'utilisateur.pseudoUser': utilisateur
+            };
+              
+            const findCommentaire = await commentaireModel.findOne(query).exec(); // recherche des commentaires ayant le vin saisi dans la BDD
+
+            if(findCommentaire) {
+                return findCommentaire;
+            }
+            return false;
+        } 
+        catch (err) {
+            console.log('Erreur service !' + err);
+            throw err;
         }
+    }
+
+    static async updateCommentaire(_id, message, date, note) {
         commentaireModel.updateOne({ // modification du commentaire à partir de l'id du commentaire renseigné
             _id: _id
         }, {
             $set: {
                 message: message,
-                date: date
+                date: date,
+                note: note
             }
         }).catch(() => {
             return "Erreur dans l'update !";
@@ -66,6 +83,34 @@ class commentaireService {
 
             if(deleteCommentaire.deletedCount == 1) {
                 return true;
+            }
+            return false;
+        } 
+        catch (err) {
+            console.log('Erreur service !' + err);
+            throw err;
+        }
+    }
+
+    static async getMoyenneByVin(vin) {
+        try {
+            const query = {
+                "vin.nomVin": vin,
+                note: { $exists: true }
+            }
+            const getVins = await commentaireModel.find(query).exec(); // supression du commentaire dans la BDD
+
+            if(getVins.length > 0) {
+
+                let moyenne = {};
+
+                let sum = 0;
+                for(let i = 0; i < getVins.length; i++) {
+                    sum += getVins[i].note;
+                }
+                moyenne.id = sum / getVins.length;
+
+                return moyenne;
             }
             return false;
         } 

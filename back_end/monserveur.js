@@ -190,6 +190,15 @@ app.get('/addNote', async (req, res) => {
     }
 });
 
+app.get('/getMoyenneByVin', async (req, res) => {
+    try {
+        await commentaireController.getMoyenneByVin(req,res);
+    } catch (err) {
+        console.log('Erreur getMoyenneByVin ! ' + err);
+        throw err;
+    }
+});
+
 app.get('/findNoteById', async (req, res) => {
     try {
         await noteController.findNoteById(req,res);

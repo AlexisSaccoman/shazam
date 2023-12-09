@@ -5,7 +5,7 @@ const { ObjectId } = require('mongodb');
 
 exports.addCommentaire = async(req, res) => {
     try {
-        const { message, id, vin } = req.query;
+        const { message, id, vin, note } = req.query;
         
         if(message == null || vin == null || id == null) {
             res.status(400).send("Renseignez tous les champs !");
@@ -27,10 +27,25 @@ exports.addCommentaire = async(req, res) => {
             return false;
         }
 
-        const addCommenataire = await commentaireService.addCommentaire(message, stringDate, findUser, findVin);
+        let commentaireAlreadyExists = await commentaireService.findCommentaireByVinNameAndUser(vin, id);
+        let addCommentaire;
 
-        if(addCommenataire) {
-            res.status(200).send('Commentaire ajoutée !');
+        if(commentaireAlreadyExists) {
+            try {
+                _idToFind = new ObjectId(commentaireAlreadyExists._id);
+            }
+            catch(err) {
+                res.status(400).send('ID incorrect !')
+                return false;
+            }
+            addCommentaire = await commentaireService.updateCommentaire(_idToFind, message, stringDate, note);
+        }
+        else {
+            addCommentaire = await commentaireService.addCommentaire(message, stringDate, findUser, findVin, note);
+        }
+
+        if(addCommentaire != false) {
+            res.status(200).send('Commentaire ajouté !');
             return true;
         }
         else {
@@ -73,7 +88,7 @@ exports.findCommentaireByVinName = async(req, res) => {
 
 exports.updateCommentaire = async(req, res) => {
     try {
-        const { _id, message } = req.query;
+        const { _id, message, note } = req.query;
 
         const d = new Date();
         const date = d.toLocaleDateString() + " à " + d.toLocaleTimeString();
@@ -102,7 +117,7 @@ exports.updateCommentaire = async(req, res) => {
             return false;
         }
 
-        const updateCommentaire = await commentaireService.updateCommentaire(_idToFind, message, date); // appel au service pour update le commentaire dans la BDD
+        const updateCommentaire = await commentaireService.updateCommentaire(_idToFind, message, date, note); // appel au service pour update le commentaire dans la BDD
 
         if(updateCommentaire != "Id non trouvé !" && updateCommentaire != "Erreur dans l'update !") {
             res.status(200).send("Commentaire mis à jour !");
@@ -144,6 +159,32 @@ exports.deleteCommentaire = async(req, res) => {
         }
         else {
             res.status(400).send('Commentaire non trouvé !')
+            return false;
+        }
+    }
+    catch(err) {
+        console.log('Erreur controller !' + err);
+        throw err;
+    }
+}
+
+exports.getMoyenneByVin = async(req, res) => {
+    try {
+        const { vin } = req.query;
+
+        if(vin == null) {
+            res.status(400).send("Renseignez le vin !"); // vérification des champs 
+            return false;
+        }
+
+        const getMoyenne = await commentaireService.getMoyenneByVin(vin); // appel au service pour la suppression du commentaire
+
+        if(getMoyenne) {
+            res.status(200).send(getMoyenne);
+            return true;
+        }
+        else {
+            res.status(400).send('Pas de note trouvée !')
             return false;
         }
     }

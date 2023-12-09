@@ -1,8 +1,5 @@
 const vinService = require('./vin_services');
 const userService = require('../user/user_services');
-const { ObjectId } = require('mongodb');
-const crypto = require('crypto');
-
 
 exports.addVin = async(req, res) => {
     try {

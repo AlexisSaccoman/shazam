@@ -19,6 +19,9 @@ const commentaireSchema = new Schema({
     vin: {
         type: Object,
         required: true
+    },
+    note: {
+        type: Number
     }
 });
 
