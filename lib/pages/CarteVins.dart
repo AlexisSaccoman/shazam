@@ -17,7 +17,7 @@ class CarteVins extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Wine Card'),
+        title: const Text('Wine Card'),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -62,7 +62,7 @@ class CarteVins extends StatelessWidget {
     Color couleur;
     switch (wineData.typeVin) {
       case 'blanc':
-        couleur = Color.fromARGB(255, 173, 184, 0);
+        couleur = const Color.fromARGB(255, 173, 184, 0);
         break;
       case 'rouge':
         couleur = const Color.fromARGB(255, 128, 0, 0);
@@ -94,25 +94,25 @@ class CarteVins extends StatelessWidget {
           child: Row(
             children: [
               _buildWineCircle(couleur),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       wineData.nom!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
+                    const Text(
                       "test",
                       style: TextStyle(
                         color: Colors.grey,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -125,7 +125,7 @@ class CarteVins extends StatelessWidget {
               ),
               if (userConnected && userIsAdmin)
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.delete,
                     color: Colors.red,
                   ),
@@ -135,21 +135,21 @@ class CarteVins extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text("Confirmation"),
-                          content: Text("Voulez-vous supprimer ce vin?"),
+                          title: const Text("Confirmation"),
+                          content: const Text("Voulez-vous supprimer ce vin?"),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Text("Annuler"),
+                              child: const Text("Annuler"),
                             ),
                             TextButton(
                               onPressed: () {
                                 print("Wine deleted: ${wineData.nom}");
                                 Navigator.of(context).pop();
                               },
-                              child: Text("Supprimer"),
+                              child: const Text("Supprimer"),
                             ),
                           ],
                         );
@@ -184,11 +184,11 @@ class CarteVins extends StatelessWidget {
 
   Widget _buildWinePrice(num prix) {
     return Container(
-      padding: EdgeInsets.all(8.0),
-      decoration: BoxDecoration(),
+      padding: const EdgeInsets.all(8.0),
+      decoration: const BoxDecoration(),
       child: Text(
         prix.toString(),
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.green,
         ),
@@ -198,11 +198,11 @@ class CarteVins extends StatelessWidget {
 
   Widget _buildWineRating(double note) {
     return Container(
-      padding: EdgeInsets.all(8.0),
-      decoration: BoxDecoration(),
+      padding: const EdgeInsets.all(8.0),
+      decoration: const BoxDecoration(),
       child: Row(
         children: [
-          Icon(Icons.star, color: Colors.yellow),
+          const Icon(Icons.star, color: Colors.yellow),
           Text('${note} / 5'),
         ],
       ),
