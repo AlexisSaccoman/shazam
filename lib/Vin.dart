@@ -5,7 +5,7 @@ import 'dart:io';
 class Vin extends HttpOverrides {
   String? id;
   String? nom;
-  double? tarif;
+  num? tarif;
   int? millesime;
   double? volume;
   String? cepage;

@@ -182,7 +182,7 @@ class CarteVins extends StatelessWidget {
     );
   }
 
-  Widget _buildWinePrice(double prix) {
+  Widget _buildWinePrice(num prix) {
     return Container(
       padding: EdgeInsets.all(8.0),
       decoration: BoxDecoration(),

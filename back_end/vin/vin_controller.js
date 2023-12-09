@@ -55,24 +55,21 @@ exports.updateVin = async(req, res) => {
     }
 }
 
-exports.findVinById = async(req, res) => {
+exports.findVinByEAN = async(req, res) => {
     try {
-        const { _id } = req.query;
+        const { ean } = req.query;
 
-        if(_id == null) {
-            res.status(400).send("Renseignez l'id du vin !"); // vérification des champs
+        if(ean == null) {
+            res.status(400).send("Renseignez l'EAN du vin !"); // vérification des champs
             return false;
         }
 
-        try {
-            _idToFind = new ObjectId(_id);
-        }
-        catch(err) {
-            res.status(400).send('ID incorrect !')
+        if(ean.length != 13) {
+            res.status(400).send("L'EAN doit comporter 13 chiffres !"); // vérification des champs
             return false;
         }
 
-        const findVin = await vinService.findVinById(_idToFind); // appel au service pour rechercher le vin dans la BDD
+        const findVin = await vinService.findVinByEAN(ean); // appel au service pour rechercher le vin dans la BDD
 
         if(findVin) {
             res.status(200).send(findVin);

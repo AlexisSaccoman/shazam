@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("wallpaper_accueil_2.jpg"),
+              image: AssetImage("assets/wallpaper_accueil_2.jpg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -55,7 +55,8 @@ class Home extends StatelessWidget {
               color: const Color.fromARGB(0, 255, 255, 255),
 
               // Utilisation de la Column pour aligner les boutons verticalement
-              child: ListView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // Buttton => Carte des vins
                   ElevatedButton.icon(

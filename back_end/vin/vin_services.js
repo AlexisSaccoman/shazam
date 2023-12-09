@@ -43,10 +43,10 @@ class vinService {
         }
     }
 
-    static async findVinById(_id) {
+    static async findVinByEAN(ean) {
         try {
             const query = {
-                _id : _id,
+                EAN : ean,
             }
 
             const findVin = await vinModel.findOne(query).exec(); // recherche d'un vin ayant l'id renseigné dans la BDD

@@ -69,6 +69,8 @@ class _DetailsVinState extends State<DetailsVin> {
                   children: [
                     _buildDetailText('Cépage: ${widget.wineData.cepage}'),
                     _buildDetailText('Année: ${widget.wineData.millesime}'),
+                    _buildDetailText(
+                        'Nom de domaine: ${widget.wineData.nomDeDomaine['name']}'),
                   ],
                 ),
                 trailing: Column(

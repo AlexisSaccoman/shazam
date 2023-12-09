@@ -104,11 +104,11 @@ app.get('/updateVin', async (req, res) => {
     }
 });
 
-app.get('/findVinById', async (req, res) => {
+app.get('/findVinByEAN', async (req, res) => {
     try {
-        await vinController.findVinById(req, res);
+        await vinController.findVinByEAN(req, res);
     } catch (err) {
-        console.log('Erreur findVinById ! ' + err);
+        console.log('Erreur findVinByEAN ! ' + err);
         throw err;
     }
 });
