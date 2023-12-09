@@ -26,7 +26,7 @@ class _DetailsVinState extends State<DetailsVin> {
     Color couleur;
     switch (widget.wineData.typeVin['name']) {
       case 'Vin blanc':
-        couleur = Color.fromARGB(255, 173, 184, 0);
+        couleur = const Color.fromARGB(255, 173, 184, 0);
         break;
       case 'Vin rouge':
         couleur = const Color.fromARGB(255, 128, 0, 0);
@@ -55,11 +55,11 @@ class _DetailsVinState extends State<DetailsVin> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _buildWineCircle(couleur),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ListTile(
                 title: Text(
                   'Type: ${widget.wineData.typeVin['name']}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -76,17 +76,17 @@ class _DetailsVinState extends State<DetailsVin> {
                 trailing: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Note: 5 / 5',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       'Prix: ${widget.wineData.tarif}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.green,
                         fontWeight: FontWeight.bold,
@@ -95,7 +95,7 @@ class _DetailsVinState extends State<DetailsVin> {
                   ],
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               FutureBuilder<List<Commentaire>>(
                 future: futureCommentaires,
                 builder: (context, snapshot) {
@@ -137,7 +137,7 @@ class _DetailsVinState extends State<DetailsVin> {
   Widget _buildDetailText(String text) {
     return Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 16,
       ),
     );
