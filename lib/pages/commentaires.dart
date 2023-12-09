@@ -80,7 +80,6 @@ class _CommentaireCardState extends State<CommentaireCard> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.commentaire.date);
     return Card(
       elevation: 4,
       margin: const EdgeInsets.symmetric(vertical: 8),

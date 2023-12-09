@@ -71,7 +71,7 @@ class Home extends StatelessWidget {
                                 )),
                       );
                     },
-                    icon: Icon(Icons.wine_bar),
+                    icon: const Icon(Icons.wine_bar),
                     label: const Text('Wine menu',
                         style: TextStyle(
                           fontSize: 16,
@@ -95,7 +95,7 @@ class Home extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Scanner()),
                       );
                     },
-                    icon: Icon(Icons.qr_code),
+                    icon: const Icon(Icons.qr_code),
                     label: const Text('Scanner',
                         style: TextStyle(
                           fontSize: 16,
@@ -119,7 +119,7 @@ class Home extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Settings()),
                       );
                     },
-                    icon: Icon(Icons.settings),
+                    icon: const Icon(Icons.settings),
                     label: const Text('Settings',
                         style: TextStyle(
                           fontSize: 16,
@@ -143,7 +143,7 @@ class Home extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     },
-                    icon: Icon(Icons.people),
+                    icon: const Icon(Icons.people),
                     label: const Text("Login/Register",
                         style: TextStyle(
                           fontSize: 16,

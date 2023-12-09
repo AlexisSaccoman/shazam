@@ -16,6 +16,7 @@ class CarteVins extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("$userConnected and.... $userIsAdmin");
     return Scaffold(
       appBar: AppBar(
         title: const Text('Wine Card'),
