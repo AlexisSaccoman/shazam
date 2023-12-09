@@ -43,7 +43,7 @@ class CommentairesListe extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Column(
           children: commentaires.map((commentaire) {
             return CommentaireCard(commentaire: commentaire);
@@ -80,11 +80,12 @@ class _CommentaireCardState extends State<CommentaireCard> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.commentaire.date);
     return Card(
       elevation: 4,
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -94,33 +95,33 @@ class _CommentaireCardState extends State<CommentaireCard> {
                 Text(
                   //widget.commentaire.utilisateur['pseudoUser'],
                   widget.commentaire.message!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   widget.commentaire.date!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.grey,
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               widget.commentaire.message!,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 //if (widget.commentaire.utilisateur?.isAdmin == true)
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.delete,
                     color: Colors.red,
                   ),
@@ -130,15 +131,15 @@ class _CommentaireCardState extends State<CommentaireCard> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text("Confirmation"),
-                          content:
-                              Text("Voulez-vous supprimer ce commentaire?"),
+                          title: const Text("Confirmation"),
+                          content: const Text(
+                              "Voulez-vous supprimer ce commentaire?"),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Text("Annuler"),
+                              child: const Text("Annuler"),
                             ),
                             TextButton(
                               onPressed: () {
@@ -150,7 +151,7 @@ class _CommentaireCardState extends State<CommentaireCard> {
                                 // });
                                 Navigator.of(context).pop();
                               },
-                              child: Text("Supprimer"),
+                              child: const Text("Supprimer"),
                             ),
                           ],
                         );
