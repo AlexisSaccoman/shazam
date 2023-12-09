@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shazam/Vin.dart';
 import 'DetailsVin.dart';
+import 'package:shazam/Note.dart';
 
 class CarteVins extends StatelessWidget {
   // on récupère les données passées en paramètre
@@ -116,7 +117,7 @@ class CarteVins extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildWineRating(5),
+                        _buildWineRating(wineData.nom!),
                         _buildWinePrice(wineData.tarif!),
                       ],
                     ),
@@ -196,14 +197,27 @@ class CarteVins extends StatelessWidget {
     );
   }
 
-  Widget _buildWineRating(double note) {
+  Widget _buildWineRating(String nom) {
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: const BoxDecoration(),
       child: Row(
         children: [
           const Icon(Icons.star, color: Colors.yellow),
-          Text('${note} / 5'),
+          FutureBuilder<Note>(
+            future: Note.getNote(nom),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasData) {
+                return Text('${snapshot.data?.nbEtoiles} / 5');
+              } else {
+                // if no data, show simple Text
+                return Text("Pas encoré noté !");
+              }
+            },
+          ),
+          //Text('${Note.getNote(nom)} / 5'),
         ],
       ),
     );

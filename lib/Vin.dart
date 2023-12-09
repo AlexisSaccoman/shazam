@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'dart:io';
 
-class Vin extends HttpOverrides {
+class Vin {
   String? id;
   String? nom;
   num? tarif;
