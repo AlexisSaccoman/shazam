@@ -60,20 +60,20 @@ class CarteVins extends StatelessWidget {
 
   Widget _buildWineCard(BuildContext context, Vin wineData) {
     Color couleur;
-    switch (wineData.typeVin) {
-      case 'blanc':
+    switch (wineData.typeVin['name']) {
+      case 'Vin blanc':
         couleur = const Color.fromARGB(255, 173, 184, 0);
         break;
-      case 'rouge':
+      case 'Vin rouge':
         couleur = const Color.fromARGB(255, 128, 0, 0);
         break;
-      case 'rose':
+      case 'Vin rosé':
         couleur = const Color.fromARGB(255, 255, 0, 85);
         break;
-      case 'noir':
+      case 'Vin noir':
         couleur = const Color.fromARGB(255, 0, 0, 0);
         break;
-      case 'jaune':
+      case 'Vin jaune':
         couleur = const Color.fromARGB(255, 255, 255, 0);
         break;
 
@@ -106,9 +106,9 @@ class CarteVins extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text(
-                      "test",
-                      style: TextStyle(
+                    Text(
+                      wineData.typeVin['name']!,
+                      style: const TextStyle(
                         color: Colors.grey,
                       ),
                     ),

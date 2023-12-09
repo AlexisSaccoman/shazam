@@ -93,8 +93,7 @@ class _CommentaireCardState extends State<CommentaireCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  //widget.commentaire.utilisateur['pseudoUser'],
-                  widget.commentaire.message!,
+                  widget.commentaire.utilisateur['pseudoUser'],
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
