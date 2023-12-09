@@ -131,6 +131,15 @@ app.get('/deleteVin', async (req, res) => {
     }
 });
 
+app.get('/findVins', async (req, res) => {
+    try {
+        await vinController.findVins(req, res);
+    } catch (err) {
+        console.log('Erreur findVins ! ' + err);
+        throw err;
+    }
+});
+
 
 // opérations commentaire --------------------------------------
 
@@ -143,11 +152,11 @@ app.get('/addCommentaire', async (req, res) => {
     }
 });
 
-app.get('/findCommentaireById', async (req, res) => {
+app.get('/findCommentaireByVinName', async (req, res) => {
     try {
-        await commentaireController.findCommentaireById(req, res);
+        await commentaireController.findCommentaireByVinName(req, res);
     } catch (err) {
-        console.log('Erreur findCommentaireById ! ' + err);
+        console.log('Erreur findCommentaireByVinName ! ' + err);
         throw err;
     }
 });
@@ -258,3 +267,23 @@ Liste de requêtes :
 
 
 */
+
+const crypto = require('crypto');
+
+app.get('/test', async (req, res) => {
+    try {
+
+        const user = { id: "moi", mdp: "moi2" }
+
+        const cryptedMdp = crypto.createHash('sha1').update(user.mdp).digest('hex'); // mdp crypté en SHA-1
+
+        const key = user.id + cryptedMdp;
+
+        const token = crypto.createHash('sha1').update(key).digest('hex'); // mdp crypté en SHA-1
+
+        res.send(key);
+
+    } catch (err) {
+        throw err;
+    }
+});

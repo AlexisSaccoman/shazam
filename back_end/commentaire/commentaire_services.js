@@ -20,13 +20,14 @@ class commentaireService {
         }
     }
 
-    static async findCommentaireById(_id) {
+    static async findCommentaireByVinName(nom) {
         try {
             const query = {
-                _id: _id,
-            }
+                'vin.nomVin': nom
+            };
+              
 
-            const findCommentaire = await commentaireModel.findOne(query).exec(); // recherche d'un commentaire ayant l'id saisi dans la BDD
+            const findCommentaire = await commentaireModel.find(query).exec(); // recherche des commentaires ayant le vin saisi dans la BDD
 
             if(findCommentaire) {
                 return findCommentaire;

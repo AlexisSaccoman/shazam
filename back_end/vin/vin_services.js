@@ -141,6 +141,23 @@ class vinService {
             throw err;
         }
     }
+
+    static async findVins() {
+        try {
+            const query = {}
+
+            const findVin = await vinModel.find(query).exec(); // recherche d'un vin ayant le nom renseigné dans la BDD
+
+            if(findVin) {
+                return findVin;
+            }
+            return false;
+        } 
+        catch (err) {
+            console.log('Erreur service !' + err);
+            throw err;
+        }
+    }
 }
 
 module.exports = vinService;

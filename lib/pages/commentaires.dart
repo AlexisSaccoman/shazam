@@ -1,23 +1,30 @@
 // commentaires.dart
 
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class Commentaire {
-  final String message;
-  final String date;
-  final Map<String, dynamic> utilisateur;
-  final List<Commentaire> reponses;
-  final bool isAdmin;
+  String? message;
+  String? date;
+  dynamic? utilisateur;
+  dynamic? vin;
+  List<String>? responses;
 
   Commentaire({
-    required this.message,
-    required this.date,
-    required this.utilisateur,
-    this.reponses = const [],
-    this.isAdmin = true,
+    this.message,
+    this.date,
+    this.utilisateur,
+    this.vin,
   });
-}
 
+  Commentaire.fromJson(Map<String, dynamic> json) {
+    message = json['message'];
+    date = json['date'];
+    utilisateur = json['utilisateur'];
+    vin = json['vin'];
+  }
+}
 
 class CommentairesListe extends StatelessWidget {
   final List<Commentaire> commentaires;
@@ -45,6 +52,18 @@ class CommentairesListe extends StatelessWidget {
       ],
     );
   }
+
+  static Future<List<Commentaire>> getCommentaires(nom) async {
+    var url = Uri.parse(
+        "https://pedago.univ-avignon.fr:3189/findCommentaireByVinName?nom=${nom}");
+    final response = await http.get(url, headers: {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
+    });
+    final List body = json.decode(response.body);
+    return body.map((e) => Commentaire.fromJson(e)).toList();
+  }
 }
 
 class CommentaireCard extends StatefulWidget {
@@ -55,8 +74,6 @@ class CommentaireCard extends StatefulWidget {
   @override
   _CommentaireCardState createState() => _CommentaireCardState();
 }
-
-
 
 class _CommentaireCardState extends State<CommentaireCard> {
   bool showReponses = false;
@@ -75,14 +92,15 @@ class _CommentaireCardState extends State<CommentaireCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  widget.commentaire.utilisateur['nom'],
+                  //widget.commentaire.utilisateur['pseudoUser'],
+                  widget.commentaire.message!,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  widget.commentaire.date,
+                  widget.commentaire.date!,
                   style: TextStyle(
                     color: Colors.grey,
                   ),
@@ -91,7 +109,7 @@ class _CommentaireCardState extends State<CommentaireCard> {
             ),
             SizedBox(height: 8),
             Text(
-              widget.commentaire.message,
+              widget.commentaire.message!,
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -100,62 +118,65 @@ class _CommentaireCardState extends State<CommentaireCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (widget.commentaire.isAdmin)
-                  IconButton(
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                      ),
-                    onPressed: () {
-                      // Afficher une boîte de dialogue de confirmation
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text("Confirmation"),
-                            content: Text("Voulez-vous supprimer ce commentaire?"),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text("Annuler"),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  // Implémentez la logique de suppression ici
-                                  // Par exemple, vous pouvez supprimer le commentaire de la liste
-                                  setState(() {
-                                    widget.commentaire.reponses.clear(); // Supprime également les réponses associées
-                                  });
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text("Supprimer"),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
+                //if (widget.commentaire.utilisateur?.isAdmin == true)
+                IconButton(
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.red,
                   ),
-                if (widget.commentaire.reponses.isNotEmpty)
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        showReponses = !showReponses;
-                      });
-                    },
-                    child: Text(showReponses ? 'Cacher Réponses' : 'Voir Réponses'),
-                  ),
+                  onPressed: () {
+                    // Afficher une boîte de dialogue de confirmation
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("Confirmation"),
+                          content:
+                              Text("Voulez-vous supprimer ce commentaire?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("Annuler"),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                // Implémentez la logique de suppression ici
+                                // Par exemple, vous pouvez supprimer le commentaire de la liste
+                                // setState(() {
+                                //   widget.commentaire.reponses
+                                //       .clear(); // Supprime également les réponses associées
+                                // });
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("Supprimer"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+                // if (widget.commentaire.responses!.)
+                //   ElevatedButton(
+                //     onPressed: () {
+                //       setState(() {
+                //         showReponses = !showReponses;
+                //       });
+                //     },
+                //     child: Text(
+                //         showReponses ? 'Cacher Réponses' : 'Voir Réponses'),
+                //   ),
               ],
             ),
-            if (showReponses)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: widget.commentaire.reponses.map((reponse) {
-                  return CommentaireCard(commentaire: reponse);
-                }).toList(),
-              ),
+            // if (showReponses)
+            //   Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: widget.commentaire.reponses.map((reponse) {
+            //       return CommentaireCard(commentaire: reponse);
+            //     }).toList(),
+            //   ),
           ],
         ),
       ),

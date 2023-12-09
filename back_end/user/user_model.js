@@ -26,7 +26,12 @@ const userSchema = new Schema({
     isAdmin: {
         type: Boolean,
         default: false
+    },
+    token : {
+        type: String,
+        required: true
     }
+
 });
 
 const userModel = db.model('user', userSchema);

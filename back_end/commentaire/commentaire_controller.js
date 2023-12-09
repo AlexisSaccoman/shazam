@@ -45,24 +45,16 @@ exports.addCommentaire = async(req, res) => {
     }
 }
 
-exports.findCommentaireById = async(req, res) => {
+exports.findCommentaireByVinName = async(req, res) => {
     try {
-        const { _id } = req.query;
+        const { nom } = req.query;
 
-        if(_id == null) {
-            res.status(400).send("Renseignez l'id du commentaire !"); // vérification des champs
+        if(nom == null) {
+            res.status(400).send("Renseignez le nom du vin !"); // vérification des champs
             return false;
         }
 
-        try {
-            _idToFind = new ObjectId(_id);
-        }
-        catch(err) {
-            res.status(400).send('ID incorrect !')
-            return false;
-        }
-
-        const findCommentaire = await commentaireService.findCommentaireById(_idToFind); // appel au service pour rechercher le commentaire dans la BDD
+        const findCommentaire = await commentaireService.findCommentaireByVinName(nom); // appel au service pour rechercher le commentaire dans la BDD
 
         if(findCommentaire) {
             res.status(200).send(findCommentaire);

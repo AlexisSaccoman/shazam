@@ -3,14 +3,14 @@ const { ObjectId } = require('mongodb');
 
 exports.register = async(req, res) => {
     try {
-        const { id, mdp, nom, prenom } = req.query;
+        const { id, mdp } = req.query;
 
-        if(id == null || mdp == null || nom == null || prenom == null) { // vérification des champs
+        if(id == null || mdp == null) { // vérification des champs
             res.status(400).send("Renseignez tous les champs !");
             return false;
         }
 
-        const addUser = await userService.registerUser(id, mdp, nom, prenom); // appel au service pour l'ajout de l'utilisateur
+        const addUser = await userService.registerUser(id, mdp); // appel au service pour l'ajout de l'utilisateur
 
         if(addUser) {
             res.status(200).send('Utilisateur ajouté !');

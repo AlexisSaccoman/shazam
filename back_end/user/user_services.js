@@ -2,16 +2,19 @@ const userModel = require('./user_model');
 const crypto = require('crypto');
 
 class UserService {
-    static async registerUser(id, mdp, nom, prenom) {
+    static async registerUser(id, mdp) {
         const cryptedMdp = crypto.createHash('sha1').update(mdp).digest('hex'); // mdp crypté en SHA-1
+
+        const key = id + cryptedMdp;
+        const token = crypto.createHash('sha1').update(key).digest('hex'); // token contenant l'id et le mdp crypté en SHA-1
+
         try {
             const createUser = new userModel({
                 identifiant: id,
                 mdp: cryptedMdp,
-                nom: nom,
-                prenom: prenom,
                 isConnected: false,
-                isAdmin: false
+                isAdmin: false,
+                token: token
             });
             return await createUser.save(); // sauvegarde dans la BDD
         } catch (err) {
@@ -63,6 +66,24 @@ class UserService {
                 identifiant: id,
             }
             const findUser = await userModel.findOne(query).exec(); // recherche d'un utilisateur ayant l'id saisi dans la BDD
+
+            if(findUser) {
+                return findUser;
+            }
+            return false;
+        } 
+        catch (err) {
+            console.log('Erreur service !' + err);
+            throw err;
+        }
+    }
+
+    static async findUserByToken(token) {
+        try {
+            const query = {
+                token: token,
+            }
+            const findUser = await userModel.findOne(query).exec(); // recherche d'un utilisateur ayant le token renseigné dans la BDD
 
             if(findUser) {
                 return findUser;

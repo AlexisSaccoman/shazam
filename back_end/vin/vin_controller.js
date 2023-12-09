@@ -1,5 +1,7 @@
 const vinService = require('./vin_services');
+const userService = require('../user/user_services');
 const { ObjectId } = require('mongodb');
+const crypto = require('crypto');
 
 
 exports.addVin = async(req, res) => {
@@ -122,6 +124,15 @@ exports.deleteVin = async(req, res) => {
             return false;
         }
 
+        //const user = { id : "1", mdp : "2" }
+
+        const findUser = userService.findUserByToken("1e34429ab638a51127171d1f13ed257fb8da57d4");
+
+        if(!findUser) {
+            res.status(400).send('Utilisateur non trouvé !')
+            return false;
+        }
+
         const deleteVin = await vinService.deleteVin(nom); // appel au service pour la suppression du vin
 
         if(deleteVin) {
@@ -130,6 +141,26 @@ exports.deleteVin = async(req, res) => {
         }
         else {
             res.status(400).send('Vin non trouvé !')
+            return false;
+        }
+    }
+    catch(err) {
+        console.log('Erreur controller !' + err);
+        throw err;
+    }
+}
+
+exports.findVins = async(req, res) => {
+    try {
+
+        const findVin = await vinService.findVins(); // appel au service pour rechercher tous les vins dans la BDD
+
+        if(findVin) {
+            res.status(200).send(findVin);
+            return true;
+        }
+        else {
+            res.status(400).send('Aucun vin trouvé')
             return false;
         }
     }

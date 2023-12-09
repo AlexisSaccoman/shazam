@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:shazam/Vin.dart';
 import 'commentaires.dart';
 
-class DetailsVin extends StatelessWidget {
-  final Map<String, dynamic> wineData;
+class DetailsVin extends StatefulWidget {
+  final Vin wineData;
 
   DetailsVin(this.wineData);
 
   @override
+  _DetailsVinState createState() => _DetailsVinState();
+}
+
+class _DetailsVinState extends State<DetailsVin> {
+  late Future<List<Commentaire>> futureCommentaires;
+
+  @override
+  void initState() {
+    super.initState();
+    futureCommentaires =
+        CommentairesListe.getCommentaires(widget.wineData.nom!);
+  }
+
+  @override
   Widget build(BuildContext context) {
     Color couleur;
-    switch (wineData['couleur']) {
-      case 'blanc':
+    switch (widget.wineData.typeVin['name']) {
+      case 'Vin blanc':
         couleur = Color.fromARGB(255, 173, 184, 0);
         break;
-      case 'rouge':
+      case 'Vin rouge':
         couleur = const Color.fromARGB(255, 128, 0, 0);
         break;
-      case 'rose':
+      case 'Vin rosé':
         couleur = const Color.fromARGB(255, 255, 0, 85);
         break;
       case 'noir':
@@ -29,61 +44,9 @@ class DetailsVin extends StatelessWidget {
         couleur = Colors.white; // Couleur par défaut
     }
 
-    // Commentaires fictifs pour l'exemple
-    List<Commentaire> commentaires = [
-      Commentaire(
-        message: 'Ceci est un commentaire très intéressant.',
-        date: '15 avril 2023',
-        utilisateur: {'nom': 'Utilisateur1'},
-        reponses: [
-          Commentaire(
-            message: "Merci! Content que vous l'ayez trouvé intéressant.",
-            date: '16 avril 2023',
-            utilisateur: {'nom': 'Utilisateur4'},
-          ),
-        ],
-      ),
-      Commentaire(
-        message: 'Je préfère les vins rouges, celui-ci était excellent!',
-        date: '18 avril 2023',
-        utilisateur: {'nom': 'Utilisateur2'},
-        reponses: [
-          Commentaire(
-            message: 'Les vins rouges sont vraiment spéciaux!',
-            date: '19 avril 2023',
-            utilisateur: {'nom': 'Utilisateur5'},
-          ),
-        ],
-      ),
-      Commentaire(
-        message: 'Superbe expérience de dégustation!',
-        date: '20 avril 2023',
-        utilisateur: {'nom': 'Utilisateur3'},
-        reponses: [
-          Commentaire(
-            message: "Oui, c'était incroyable! Recommande fortement.",
-            date: '21 avril 2023',
-            utilisateur: {'nom': 'Utilisateur6'},
-          ),
-          Commentaire(
-            message: 'Quel était votre vin préféré?',
-            date: '22 avril 2023',
-            utilisateur: {'nom': 'Utilisateur7'},
-            reponses: [
-              Commentaire(
-                message: "J'ai adoré le vin rouge!",
-                date: '23 avril 2023',
-                utilisateur: {'nom': 'Utilisateur8'},
-              ),
-            ],
-          ),
-        ],
-      ),
-    ];
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(wineData['titre']),
+        title: Text(widget.wineData.nom!),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -95,7 +58,7 @@ class DetailsVin extends StatelessWidget {
               SizedBox(height: 16),
               ListTile(
                 title: Text(
-                  'Type: ${wineData['type']}',
+                  'Type: ${widget.wineData.typeVin['name']}',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -104,15 +67,15 @@ class DetailsVin extends StatelessWidget {
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildDetailText('Cépage: ${wineData['cepage']}'),
-                    _buildDetailText('Année: ${wineData['annee']}'),
+                    _buildDetailText('Cépage: ${widget.wineData.cepage}'),
+                    _buildDetailText('Année: ${widget.wineData.millesime}'),
                   ],
                 ),
                 trailing: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Note: ${wineData['note']} / 5',
+                      'Note: 5 / 5',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
@@ -120,7 +83,7 @@ class DetailsVin extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Prix: ${wineData['prix']}',
+                      'Prix: ${widget.wineData.tarif}',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.green,
@@ -131,7 +94,19 @@ class DetailsVin extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16),
-              CommentairesListe(commentaires: commentaires),
+              FutureBuilder<List<Commentaire>>(
+                future: futureCommentaires,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  } else if (snapshot.hasData) {
+                    final commentaires = snapshot.data!;
+                    return CommentairesListe(commentaires: commentaires);
+                  } else {
+                    return Text("Erreur ! ${snapshot.error.toString()}");
+                  }
+                },
+              ),
             ],
           ),
         ),
