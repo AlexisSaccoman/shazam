@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 class Commentaire {
   String? message;
   String? date;
-  dynamic? utilisateur;
-  dynamic? vin;
+  dynamic utilisateur;
+  dynamic vin;
   List<String>? responses;
 
   Commentaire({
@@ -29,7 +29,7 @@ class Commentaire {
 class CommentairesListe extends StatelessWidget {
   final List<Commentaire> commentaires;
 
-  CommentairesListe({required this.commentaires});
+  const CommentairesListe({super.key, required this.commentaires});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class CommentairesListe extends StatelessWidget {
 
   static Future<List<Commentaire>> getCommentaires(nom) async {
     var url = Uri.parse(
-        "https://pedago.univ-avignon.fr:3189/findCommentaireByVinName?nom=${nom}");
+        "https://pedago.univ-avignon.fr:3189/findCommentaireByVinName?nom=$nom");
     final response = await http.get(url, headers: {
       "Access-Control-Allow-Origin": "*",
       'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ class CommentairesListe extends StatelessWidget {
 class CommentaireCard extends StatefulWidget {
   final Commentaire commentaire;
 
-  CommentaireCard({required this.commentaire});
+  const CommentaireCard({super.key, required this.commentaire});
 
   @override
   _CommentaireCardState createState() => _CommentaireCardState();

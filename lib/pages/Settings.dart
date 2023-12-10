@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
+  const Settings({super.key});
+
   @override
   _SettingsState createState() => _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: const Text('Settings'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -24,25 +26,25 @@ class _SettingsState extends State<Settings> {
             // Username
             TextFormField(
               controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Username'),
+              decoration: const InputDecoration(labelText: 'Username'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
 
             // Password
             TextFormField(
               controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
 
             // Confirm Password
             TextFormField(
               controller: _confirmPasswordController,
               obscureText: true,
-              decoration: InputDecoration(labelText: 'Confirm Password'),
+              decoration: const InputDecoration(labelText: 'Confirm Password'),
             ),
-            SizedBox(height: 32.0),
+            const SizedBox(height: 32.0),
 
             // Save Button
             ElevatedButton(
@@ -50,7 +52,7 @@ class _SettingsState extends State<Settings> {
                 // TODO: Implement save logic
                 saveSettings();
               },
-              child: Text('Save'),
+              child: const Text('Save'),
             ),
           ],
         ),

@@ -54,4 +54,27 @@ class Vin extends HttpOverrides {
     final List body = json.decode(response.body);
     return body.map((e) => Vin.fromJson(e)).toList();
   }
+
+  // méthode pour récupérer un vin par son code EAN
+  static Future<Vin> getVinByEAN(String ean) async {
+    var url = Uri.parse("https://pedago.univ-avignon.fr:3189/findVinByEAN?ean=$ean");
+    final response = await http.get(url, headers: {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
+    });
+    final body = json.decode(response.body);
+    return Vin.fromJson(body);
+  }
+
+  //méthode pour supprimer un vin avec son nom
+  static Future<String> deleteVin(String nom) async {
+    var url = Uri.parse("https://pedago.univ-avignon.fr:3189/deleteVin?nom=$nom");
+    final response = await http.get(url, headers: {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
+    });
+    return response.body;
+  }
 }

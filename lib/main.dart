@@ -4,7 +4,7 @@ import 'pages/Accueil.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyHttpOverrides extends HttpOverrides {
@@ -19,8 +19,8 @@ class MyHttpOverrides extends HttpOverrides {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  final userConnected = false;
-  final userIsAdmin = false;
+  final userConnected = true;
+  final userIsAdmin = true;
 
   @override
   Widget build(BuildContext context) {

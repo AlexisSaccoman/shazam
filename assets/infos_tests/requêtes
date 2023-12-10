@@ -1,0 +1,31 @@
+
+https://pedago.univ-avignon.fr:3189/addVin?
+    nom=
+    &EAN=
+    &descriptif=
+    &tarif=
+    &millesime=
+    &volume=
+    &cepage=
+    &allergenes=
+    &teneurEnAlcool=
+    &imgURL=
+    &nomDeDomaine=
+    &provenance=
+    &typeVin=
+
+
+- Pastis - 3047100000230
+https://pedago.univ-avignon.fr:3189/addVin?nom=Pastis&EAN=3047100000230&descriptif=ça%tabasse&tarif=19.90&millesime=2021&volume=1.5&cepage=Pastis&allergenes=Anéthol%(présent%dans%anis),sulfites&teneurEnAlcool=44.9&imgURL=&nomDeDomaine=ARLenoble&provenance=France&typeVin=vinBlanc
+
+
+
+https://pedago.univ-avignon.fr:3189/addVin?nom=Vin%20de%20Mirabelle&EAN=1234567891234&descriptif=Joli%20vin&tarif=12.81&millesime=1999&volume=1.2&cepage=raisin&allergenes=ceci,cela,encorececi,encorecela&teneurEnAlcool=1.2&imgURL=blablabla.png&nomDeDomaine=ARLenoble&provenance=France&typeVin=vinRouge
+
+
+https://pedago.univ-avignon.fr:3189/addVin?nom=Pastis&EAN=1234567891234&descriptif=ça%tabasse&tarif=19.90&millesime=2021&volume=1.5&cepage=raisin&allergenes=ceci,cela,encorececi,encorecela&teneurEnAlcool=1.2&imgURL=blablabla.png&nomDeDomaine=ARLenoble&provenance=France&typeVin=vinRouge
+
+
+problème sur :
+- volume (conflit int et double)
+- teneur en alcool (conflit int et double)

@@ -1,0 +1,87 @@
+        nom: Domaine de la Romanée-Conti
+        Région: Bourgogne
+        Cépage: Pinot Noir
+        Millésime: 2015
+        Allergènes: Sulfites, protéines d'œuf, lait
+        Teneur en alcool: 13%
+        Type: Vin rouge
+
+        nom: Château Margaux
+        Région: Bordeaux (Margaux, AOC Margaux)
+        Cépage: Cabernet Sauvignon, Merlot, Cabernet Franc, Petit Verdot
+        Millésime: 2009
+        Allergènes: Sulfites, protéines de lait, produits à base de blé
+        Teneur en alcool: 13.5%
+        Type: Vin rouge
+
+        nom: Domaine Leflaive
+        Région: Bourgogne (Puligny-Montrachet, AOC Puligny-Montrachet)
+        Cépage: Chardonnay
+        Millésime: 2014
+        Allergènes: Sulfites, protéines d'œuf, crustacés
+        Teneur en alcool: 13%
+        Type: Vin blanc
+
+        nom: Château d'Yquem
+        Région: Bordeaux (Sauternes, AOC Sauternes)
+        Cépage: Sémillon, Sauvignon Blanc
+        Millésime: 2001
+        Allergènes: Sulfites, protéines de lait, crustacés
+        Teneur en alcool: 13.5%
+        Type: Vin blanc liquoreux
+
+        nom: Domaine Tempier
+        Région: Provence (Bandol, AOC Bandol)
+        Cépage: Mourvèdre, Grenache, Cinsault
+        Millésime: 2017
+        Allergènes: Sulfites, protéines d'œuf, crustacés
+        Teneur en alcool: 14%
+        Type: Vin rouge
+
+        nom: Château Musar
+        Région: Vallée de la Bekaa, Liban
+        Cépage: Cabernet Sauvignon, Carignan, Cinsault
+        Millésime: 2008
+        Allergènes: Sulfites, protéines d'œuf, crustacés
+        Teneur en alcool: 14%
+        Type: Vin rouge
+
+        nom: Domaine Huet
+        Région: Vallée de la Loire (Vouvray, AOC Vouvray)
+        Cépage: Chenin Blanc
+        Millésime: 2016
+        Allergènes: Sulfites, protéines d'œuf, crustacés
+        Teneur en alcool: 13.5%
+        Type: Vin blanc
+
+        nom: Château Simone
+        Région: Provence (Palette, AOC Palette)
+        Cépage: Grenache, Mourvèdre, Cinsault
+        Millésime: 2013
+        Allergènes: Sulfites, protéines d'œuf, crustacés
+        Teneur en alcool: 14%
+        Type: Vin rouge
+
+        nom: Domaine Zind-Humbrecht
+        Région: Alsace
+        Cépage: Riesling
+        Millésime: 2010
+        Allergènes: Sulfites, protéines d'œuf, crustacés
+        Teneur en alcool: 14%
+        Type: Vin blanc
+
+        nom: Château Simone
+        Région: Provence (Palette, AOC Palette)
+        Cépage: Mourvèdre, Grenache, Cinsault
+        Millésime: 2012
+        Allergènes: Sulfites, protéines d'œuf, crustacés
+        Teneur en alcool: Environ 14%
+        Type: Vin rouge
+    
+        nom: Pastis
+        Région: Marseille, France
+        Millésime: 2021
+        Cépage: Mourvèdre, Grenache, Cinsault
+        Allergènes: Anéthol (présent dans l'anis), sulfites
+        Teneur en alcool: 45%
+        Type: ça tabasse

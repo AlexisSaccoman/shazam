@@ -8,7 +8,7 @@ class CarteVins extends StatelessWidget {
   final bool userIsAdmin;
   Future<List<Vin>> futureVins = Vin.getVins();
 
-  CarteVins({
+  CarteVins({super.key, 
     required this.userConnected,
     required this.userIsAdmin,
   });
@@ -135,21 +135,23 @@ class CarteVins extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: const Text("Confirmation"),
-                          content: const Text("Voulez-vous supprimer ce vin?"),
+                          title: const Text("Confirm"),
+                          content: const Text("Do you want to suppress this wine ?"),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: const Text("Annuler"),
+                              child: const Text("Cancel"),
                             ),
                             TextButton(
                               onPressed: () {
+                                Vin.deleteVin(wineData.nom!);
                                 print("Wine deleted: ${wineData.nom}");
                                 Navigator.of(context).pop();
+                                Navigator.of(context).pushReplacement;
                               },
-                              child: const Text("Supprimer"),
+                              child: const Text("Confirm"),
                             ),
                           ],
                         );
@@ -203,7 +205,7 @@ class CarteVins extends StatelessWidget {
       child: Row(
         children: [
           const Icon(Icons.star, color: Colors.yellow),
-          Text('${note} / 5'),
+          Text('$note / 5'),
         ],
       ),
     );

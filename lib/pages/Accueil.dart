@@ -11,7 +11,7 @@ class Home extends StatelessWidget {
   final bool userConnected;
   final bool userIsAdmin;
 
-  Home({
+  const Home({super.key, 
     required this.userConnected,
     required this.userIsAdmin,
   });
@@ -35,7 +35,7 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('ShazaMurge'),
+        title: const Text('ShazaMurge'),
       ),
       body: Center(
         // container de la page global => décoré avec une image de fond
@@ -71,7 +71,7 @@ class Home extends StatelessWidget {
                                 )),
                       );
                     },
-                    icon: Icon(Icons.wine_bar),
+                    icon: const Icon(Icons.wine_bar),
                     label: const Text('Wine menu',
                         style: TextStyle(
                           fontSize: 16,
@@ -92,10 +92,10 @@ class Home extends StatelessWidget {
                       // Action à effectuer lors du clic sur le bouton => passer à l'écran de scanner
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Scanner()),
+                        MaterialPageRoute(builder: (context) => const Scanner()),
                       );
                     },
-                    icon: Icon(Icons.qr_code),
+                    icon: const Icon(Icons.qr_code),
                     label: const Text('Scanner',
                         style: TextStyle(
                           fontSize: 16,
@@ -116,10 +116,10 @@ class Home extends StatelessWidget {
                       // Action à effectuer lors du clic sur le bouton => passer à l'écran de settings
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Settings()),
+                        MaterialPageRoute(builder: (context) => const Settings()),
                       );
                     },
-                    icon: Icon(Icons.settings),
+                    icon: const Icon(Icons.settings),
                     label: const Text('Settings',
                         style: TextStyle(
                           fontSize: 16,
@@ -143,7 +143,7 @@ class Home extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     },
-                    icon: Icon(Icons.people),
+                    icon: const Icon(Icons.people),
                     label: const Text("Login/Register",
                         style: TextStyle(
                           fontSize: 16,

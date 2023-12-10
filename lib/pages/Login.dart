@@ -4,11 +4,13 @@ class LoginPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Log In / Register'),
+        title: const Text('Log In / Register'),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
@@ -18,8 +20,8 @@ class LoginPage extends StatelessWidget {
             children: <Widget>[
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.fromLTRB(30.0, 15.0, 32.0, 20.0),
-                child: Text(
+                padding: const EdgeInsets.fromLTRB(30.0, 15.0, 32.0, 20.0),
+                child: const Text(
                   "Please log in or sign up",
                   style: TextStyle(
                     fontSize: 20,
@@ -29,10 +31,10 @@ class LoginPage extends StatelessWidget {
               ),
               // Username TextField
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: TextField(
                   controller: usernameController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Username',
                     hintText: 'Enter your username',
                   ),
@@ -40,11 +42,11 @@ class LoginPage extends StatelessWidget {
               ),
               // Password TextField
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: TextField(
                   controller: passwordController,
                   obscureText: true, // Pour masquer le texte du mot de passe
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Password',
                     hintText: 'Enter your password',
                   ),
@@ -59,10 +61,10 @@ class LoginPage extends StatelessWidget {
                     String password = passwordController.text;
 
                     // afficher le contenu des champs Username et Password dans la console
-                    print("Username: " + username);
-                    print("Password: " + password);
+                    print("Username: $username");
+                    print("Password: $password");
                   },
-                  child: Text('Login/Register'),
+                  child: const Text('Login/Register'),
                 ),
               ),
             ],

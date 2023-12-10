@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shazam/Vin.dart';
+import '../Vin.dart';
 import 'commentaires.dart';
 
 class DetailsVin extends StatefulWidget {
   final Vin wineData;
 
-  DetailsVin(this.wineData);
+  const DetailsVin(this.wineData, {super.key});
 
   @override
   _DetailsVinState createState() => _DetailsVinState();
