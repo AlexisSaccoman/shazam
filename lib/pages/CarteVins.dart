@@ -1,3 +1,5 @@
+import 'dart:js_util';
+
 import 'package:flutter/material.dart';
 import 'package:shazam/Vin.dart';
 import 'DetailsVin.dart';
@@ -5,18 +7,20 @@ import 'package:shazam/Note.dart';
 
 class CarteVins extends StatelessWidget {
   // on récupère les données passées en paramètre
-  final bool userConnected;
-  final bool userIsAdmin;
+  bool userConnected;
+  bool userIsAdmin;
+  String username;
+  String note = "Pas encore noté !";
   Future<List<Vin>> futureVins = Vin.getVins();
 
   CarteVins({
     required this.userConnected,
     required this.userIsAdmin,
+    required this.username,
   });
 
   @override
   Widget build(BuildContext context) {
-    print("$userConnected and.... $userIsAdmin");
     return Scaffold(
       appBar: AppBar(
         title: const Text('Wine Card'),
@@ -42,7 +46,8 @@ class CarteVins extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DetailsVin(vins[index]),
+                          builder: (context) => DetailsVin(vins[index], note,
+                              userConnected, userIsAdmin, username),
                         ),
                       );
                     },
@@ -88,7 +93,13 @@ class CarteVins extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => DetailsVin(wineData)),
+            MaterialPageRoute(
+                builder: (context) => DetailsVin(
+                    wineData,
+                    wineData.note ?? "Pas encore noté !",
+                    userConnected,
+                    userIsAdmin,
+                    username)),
           );
         },
         child: Padding(
@@ -118,7 +129,7 @@ class CarteVins extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildWineRating(wineData.nom!),
+                        _buildWineRating(wineData),
                         _buildWinePrice(wineData.tarif!),
                       ],
                     ),
@@ -198,27 +209,37 @@ class CarteVins extends StatelessWidget {
     );
   }
 
-  Widget _buildWineRating(String nom) {
+  Future<String> _getWineRating(String nom) async {
+    // Assuming Note.getNote returns a Future<Note>
+    Note? noteData = await Note.getNote(nom);
+
+    if (noteData != null) {
+      return '${noteData.nbEtoiles} / 5';
+    } else {
+      return 'Pas encore noté !';
+    }
+  }
+
+  Widget _buildWineRating(Vin wineData) {
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: const BoxDecoration(),
       child: Row(
         children: [
           const Icon(Icons.star, color: Colors.yellow),
-          FutureBuilder<Note>(
-            future: Note.getNote(nom),
+          FutureBuilder<String>(
+            future: _getWineRating(wineData.nom!),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
               } else if (snapshot.hasData) {
-                return Text('${snapshot.data?.nbEtoiles} / 5');
+                wineData.note = snapshot.data!;
+                return Text(snapshot.data!);
               } else {
-                // if no data, show simple Text
-                return Text("Pas encoré noté !");
+                return const Text("Pas encore noté !");
               }
             },
           ),
-          //Text('${Note.getNote(nom)} / 5'),
         ],
       ),
     );

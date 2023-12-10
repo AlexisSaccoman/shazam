@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:shazam/Vin.dart';
 import 'commentaires.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DetailsVin extends StatefulWidget {
   final Vin wineData;
+  String note;
+  final bool userConnected;
+  final bool userIsAdmin;
+  final String username;
 
-  DetailsVin(this.wineData);
+  DetailsVin(this.wineData, this.note, this.userConnected, this.userIsAdmin,
+      this.username);
 
   @override
   _DetailsVinState createState() => _DetailsVinState();
@@ -23,7 +29,10 @@ class _DetailsVinState extends State<DetailsVin> {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController commentController = TextEditingController();
+    double? userRating;
     Color couleur;
+
     switch (widget.wineData.typeVin['name']) {
       case 'Vin blanc':
         couleur = const Color.fromARGB(255, 173, 184, 0);
@@ -76,9 +85,9 @@ class _DetailsVinState extends State<DetailsVin> {
                 trailing: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Note: 5 / 5',
-                      style: TextStyle(
+                    Text(
+                      "Note: ${widget.note}",
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
                       ),
@@ -103,11 +112,52 @@ class _DetailsVinState extends State<DetailsVin> {
                     return const CircularProgressIndicator();
                   } else if (snapshot.hasData) {
                     final commentaires = snapshot.data!;
-                    return CommentairesListe(commentaires: commentaires);
+                    return CommentairesListe(
+                        commentaires: commentaires,
+                        userIsConnected: widget.userConnected,
+                        userIsAdmin: widget.userIsAdmin,
+                        username: widget.username);
                   } else {
                     return Text("Erreur ! ${snapshot.error.toString()}");
                   }
                 },
+              ),
+              //if (widget.userConnected)
+              // Username
+              TextFormField(
+                controller: commentController,
+                decoration: const InputDecoration(
+                  labelText: 'Comment',
+                  hintText: 'Enter your comment',
+                ),
+              ),
+              const SizedBox(height: 16.0),
+              if (widget.userConnected)
+                RatingBar.builder(
+                  initialRating: 3,
+                  minRating: 1,
+                  direction: Axis.horizontal,
+                  allowHalfRating: true,
+                  itemCount: 5,
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  itemBuilder: (context, _) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  onRatingUpdate: (rating) {
+                    userRating =
+                        rating; // on sauvegarde la note de l'utilisateur
+                  },
+                ),
+              //if (widget.userConnected)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    print(widget.username);
+                  },
+                  child: const Text('Send your comment !'),
+                ),
               ),
             ],
           ),

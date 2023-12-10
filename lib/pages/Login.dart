@@ -82,6 +82,7 @@ class LoginPage extends StatelessWidget {
                         final userInfo = json.decode(response)['user'];
                         final bool userConnected = userInfo['isConnected'];
                         final bool userIsAdmin = userInfo['isAdmin'];
+                        final String username = userInfo['identifiant'];
 
                         // Navigate to the next screen
                         Navigator.push(
@@ -90,6 +91,7 @@ class LoginPage extends StatelessWidget {
                             builder: (context) => CarteVins(
                               userConnected: userConnected,
                               userIsAdmin: userIsAdmin,
+                              username: username,
                             ),
                           ),
                         );
@@ -106,14 +108,14 @@ class LoginPage extends StatelessWidget {
                       // Handle exceptions during the login process
                       print("Error: $e");
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text("Erreur pendant le login !"),
                           backgroundColor: Colors.red,
                         ),
                       );
                     }
                   },
-                  child: Text('Login'),
+                  child: const Text('Login'),
                 ),
               ),
               Padding(

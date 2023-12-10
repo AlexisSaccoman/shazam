@@ -14,6 +14,7 @@ class Vin {
   dynamic provenance;
   dynamic typeVin;
   String? ean;
+  String? note;
 
   Vin(
       {this.id,

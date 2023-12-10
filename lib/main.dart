@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
 
   final userConnected = false;
   final userIsAdmin = false;
+  final username = "";
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
       home: Home(
         userConnected: userConnected,
         userIsAdmin: userIsAdmin,
+        username: username,
       ),
     );
   }
