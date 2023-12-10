@@ -13,8 +13,7 @@ class DetailsVin extends StatefulWidget {
   final bool userIsAdmin;
   final String username;
 
-  DetailsVin(this.wineData, this.note, this.userConnected, this.userIsAdmin,
-      this.username);
+  DetailsVin(this.wineData, this.note, this.userConnected, this.userIsAdmin,this.username);
 
   @override
   _DetailsVinState createState() => _DetailsVinState();

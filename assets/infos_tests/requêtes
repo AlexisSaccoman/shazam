@@ -23,6 +23,7 @@ https://pedago.univ-avignon.fr:3189/addVin?nom=Pastis&EAN=3047100000230&descript
 https://pedago.univ-avignon.fr:3189/addVin?nom=Vin%20de%20Mirabelle&EAN=1234567891234&descriptif=Joli%20vin&tarif=12.81&millesime=1999&volume=1.2&cepage=raisin&allergenes=ceci,cela,encorececi,encorecela&teneurEnAlcool=1.2&imgURL=blablabla.png&nomDeDomaine=ARLenoble&provenance=France&typeVin=vinRouge
 
 
+// debug
 https://pedago.univ-avignon.fr:3189/addVin?nom=Pastis&EAN=1234567891234&descriptif=ça%tabasse&tarif=19.90&millesime=2021&volume=1.5&cepage=raisin&allergenes=ceci,cela,encorececi,encorecela&teneurEnAlcool=1.2&imgURL=blablabla.png&nomDeDomaine=ARLenoble&provenance=France&typeVin=vinRouge
 
 

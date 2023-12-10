@@ -89,13 +89,17 @@ class Home extends StatelessWidget {
                   // Espacement vertical de 20 pixels
                   SizedBox(height: spaceBetweenButtons),
 
-                  // Buttton => Scanner
+                  // Button => Scanner
                   ElevatedButton.icon(
                     onPressed: () {
                       // Action à effectuer lors du clic sur le bouton => passer à l'écran de scanner
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Scanner()),
+                        MaterialPageRoute(builder: (context) => Scanner(
+                                  userConnected: userConnected,
+                                  userIsAdmin: userIsAdmin,
+                                  username: username,
+                        )),
                       );
                     },
                     icon: const Icon(Icons.qr_code),
