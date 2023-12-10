@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shazam/Vin.dart';
+import 'package:shazam/pages/CarteVins.dart';
 import 'commentaires.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -122,15 +125,15 @@ class _DetailsVinState extends State<DetailsVin> {
                   }
                 },
               ),
-              //if (widget.userConnected)
-              // Username
-              TextFormField(
-                controller: commentController,
-                decoration: const InputDecoration(
-                  labelText: 'Comment',
-                  hintText: 'Enter your comment',
+              if (widget.userConnected)
+                // Username
+                TextFormField(
+                  controller: commentController,
+                  decoration: const InputDecoration(
+                    labelText: 'Comment',
+                    hintText: 'Enter your comment',
+                  ),
                 ),
-              ),
               const SizedBox(height: 16.0),
               if (widget.userConnected)
                 RatingBar.builder(
@@ -149,16 +152,59 @@ class _DetailsVinState extends State<DetailsVin> {
                         rating; // on sauvegarde la note de l'utilisateur
                   },
                 ),
-              //if (widget.userConnected)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: () async {
-                    print(widget.username);
-                  },
-                  child: const Text('Send your comment !'),
+              if (widget.userConnected)
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      try {
+                        final response =
+                            await CommentairesListe.postCommentaire(
+                                commentController.text,
+                                widget.wineData.nom,
+                                widget.username,
+                                userRating);
+
+                        if (response.contains("Commentaire ajouté !")) {
+                          // Display success message
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Commentaire ajouté !'),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CarteVins(
+                                      userConnected: widget.userConnected,
+                                      userIsAdmin: widget.userIsAdmin,
+                                      username: widget.username,
+                                    )),
+                          );
+                        } else {
+                          // Display error message
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(response),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        // Handle exceptions during the login process
+                        print("Error: $e");
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Erreur d'ajout du commentaire !"),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text('Send your comment !'),
+                  ),
                 ),
-              ),
             ],
           ),
         ),

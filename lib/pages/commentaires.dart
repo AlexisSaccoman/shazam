@@ -78,9 +78,16 @@ class CommentairesListe extends StatelessWidget {
     return body.map((e) => Commentaire.fromJson(e)).toList();
   }
 
-  static Future<String> postCommentaire(message, nomVin, username) async {
-    var url = Uri.parse(
-        "https://pedago.univ-avignon.fr:3189/addCommentaire?message=$message&vin=$nomVin&id=$username");
+  static Future<String> postCommentaire(message, nomVin, username, note) async {
+    var url;
+    if (note == null) {
+      url = Uri.parse(
+          "https://pedago.univ-avignon.fr:3189/addCommentaire?message=$message&vin=$nomVin&id=$username");
+    } else {
+      url = Uri.parse(
+          "https://pedago.univ-avignon.fr:3189/addCommentaire?message=$message&vin=$nomVin&id=$username&note=$note");
+    }
+    print(url);
     final response = await http.get(url, headers: {
       "Access-Control-Allow-Origin": "*",
       'Content-Type': 'application/json',
