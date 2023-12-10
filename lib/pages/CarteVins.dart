@@ -289,7 +289,7 @@ class CarteVins extends StatelessWidget {
             MaterialPageRoute(
                 builder: (context) => DetailsVin(
                     wineData,
-                    wineData.note ?? "Pas encore noté !",
+                    wineData.note ?? "Pas encore noté",
                     userConnected,
                     userIsAdmin,
                     username)),
