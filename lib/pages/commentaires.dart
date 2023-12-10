@@ -9,6 +9,7 @@ class Commentaire {
   String? date;
   dynamic? utilisateur;
   dynamic? vin;
+  dynamic? note;
   List<String>? responses;
 
   Commentaire({
@@ -24,6 +25,7 @@ class Commentaire {
     date = json['date'];
     utilisateur = json['utilisateur'];
     vin = json['vin'];
+    note = json['note'].toString();
   }
 }
 
@@ -87,7 +89,6 @@ class CommentairesListe extends StatelessWidget {
       url = Uri.parse(
           "https://pedago.univ-avignon.fr:3189/addCommentaire?message=$message&vin=$nomVin&id=$username&note=$note");
     }
-    print(url);
     final response = await http.get(url, headers: {
       "Access-Control-Allow-Origin": "*",
       'Content-Type': 'application/json',
@@ -99,6 +100,27 @@ class CommentairesListe extends StatelessWidget {
   static Future<String> deleteCommentaire(id) async {
     var url = Uri.parse(
         "https://pedago.univ-avignon.fr:3189/deleteCommentaire?_id=$id");
+    final response = await http.get(url, headers: {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
+    });
+    return response.body;
+  }
+
+  static Future<String> updateCommentaire(id, message, note) async {
+    var url;
+    if (note == null ||
+        note == "null" ||
+        note == "Pas encore noté !" ||
+        note == "") {
+      url = Uri.parse(
+          "https://pedago.univ-avignon.fr:3189/updateCommentaire?_id=$id&message=$message");
+    } else {
+      url = Uri.parse(
+          "https://pedago.univ-avignon.fr:3189/updateCommentaire?_id=$id&message=$message&note=$note");
+    }
+    print(url);
     final response = await http.get(url, headers: {
       "Access-Control-Allow-Origin": "*",
       'Content-Type': 'application/json',
@@ -168,14 +190,14 @@ class _CommentaireCardState extends State<CommentaireCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (widget.userIsAdmin)
+                if (widget.userIsConnected && widget.userIsAdmin)
                   IconButton(
                     icon: const Icon(
                       Icons.delete,
                       color: Colors.red,
                     ),
                     onPressed: () {
-                      // Afficher une boîte de dialogue de confirmation
+                      // Show a confirmation dialog for deletion
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -193,6 +215,7 @@ class _CommentaireCardState extends State<CommentaireCard> {
                               TextButton(
                                 onPressed: () async {
                                   try {
+                                    // Call the deleteCommentaire method
                                     final response = await CommentairesListe
                                         .deleteCommentaire(
                                             widget.commentaire.id);
@@ -203,13 +226,13 @@ class _CommentaireCardState extends State<CommentaireCard> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => CarteVins(
-                                                  userConnected:
-                                                      widget.userIsConnected,
-                                                  userIsAdmin:
-                                                      widget.userIsAdmin,
-                                                  username: widget.username,
-                                                )),
+                                          builder: (context) => CarteVins(
+                                            userConnected:
+                                                widget.userIsConnected,
+                                            userIsAdmin: widget.userIsAdmin,
+                                            username: widget.username,
+                                          ),
+                                        ),
                                       );
                                       // Display success message
                                       ScaffoldMessenger.of(context)
@@ -231,7 +254,7 @@ class _CommentaireCardState extends State<CommentaireCard> {
                                       );
                                     }
                                   } catch (e) {
-                                    // Handle exceptions during the login process
+                                    // Handle exceptions during the deletion process
                                     print("Error: $e");
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
@@ -250,25 +273,120 @@ class _CommentaireCardState extends State<CommentaireCard> {
                       );
                     },
                   ),
-                // if (widget.commentaire.responses!.)
-                //   ElevatedButton(
-                //     onPressed: () {
-                //       setState(() {
-                //         showReponses = !showReponses;
-                //       });
-                //     },
-                //     child: Text(
-                //         showReponses ? 'Cacher Réponses' : 'Voir Réponses'),
-                //   ),
+                if (widget.userIsConnected && widget.userIsAdmin)
+                  IconButton(
+                    icon: const Icon(
+                      Icons.edit,
+                      color: Colors.lightBlue,
+                    ),
+                    onPressed: () {
+                      // Show a dialog for editing the comment
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          final TextEditingController commentController =
+                              TextEditingController(
+                                  text: widget.commentaire.message);
+                          final TextEditingController noteController =
+                              TextEditingController(
+                                  text: widget.commentaire.note == "null"
+                                      ? "Pas encore noté !"
+                                      : widget.commentaire.note);
+
+                          return AlertDialog(
+                            title: const Text("Modifier le commentaire"),
+                            content: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextFormField(
+                                  controller: commentController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Comment',
+                                    hintText: 'Enter your comment',
+                                  ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: noteController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Note',
+                                    hintText: 'Enter your note',
+                                  ),
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text("Annuler"),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  try {
+                                    // Call the deleteCommentaire method
+                                    final response = await CommentairesListe
+                                        .updateCommentaire(
+                                            widget.commentaire.id,
+                                            commentController.text,
+                                            noteController.text);
+
+                                    if (response
+                                        .contains("Commentaire mis à jour !")) {
+                                      Navigator.of(context).pop();
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => CarteVins(
+                                            userConnected:
+                                                widget.userIsConnected,
+                                            userIsAdmin: widget.userIsAdmin,
+                                            username: widget.username,
+                                          ),
+                                        ),
+                                      );
+                                      // Display success message
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content:
+                                              Text('Commentaire mis à jour !'),
+                                          backgroundColor: Colors.green,
+                                        ),
+                                      );
+                                    } else {
+                                      // Display error message
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(response),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    }
+                                  } catch (e) {
+                                    // Handle exceptions during the deletion process
+                                    print("Error: $e");
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                            "Erreur pendant la modification !"),
+                                        backgroundColor: Colors.red,
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: const Text("Enregistrer"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
               ],
             ),
-            // if (showReponses)
-            //   Column(
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: widget.commentaire.reponses.map((reponse) {
-            //       return CommentaireCard(commentaire: reponse);
-            //     }).toList(),
-            //   ),
           ],
         ),
       ),

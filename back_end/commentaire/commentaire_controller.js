@@ -94,18 +94,23 @@ exports.updateCommentaire = async(req, res) => {
         const date = d.toLocaleDateString() + " à " + d.toLocaleTimeString();
 
 
-        if(_id == null) {
+        if(_id == null || _id.length == 0) {
             res.status(400).send("Renseignez l'id du commentaire !"); // vérification des champs
             return false;
         }
 
-        if(message == null) {
+        if(message == null || message.length == 0) {
             res.status(400).send("Renseignez le message du commentaire !"); // vérification des champs
             return false;
         }
 
-        if(date == null) {
+        if(date == null || date.length == 0) {
             res.status(400).send("Renseignez la date du commentaire !"); // vérification des champs
+            return false;
+        }
+
+        if(note != null && note < 0 || note > 5) {
+            res.status(400).send("La note doit être comprise entre 1 et 5 !"); // vérification des champs
             return false;
         }
 

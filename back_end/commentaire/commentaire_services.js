@@ -108,7 +108,7 @@ class commentaireService {
                 for(let i = 0; i < getVins.length; i++) {
                     sum += getVins[i].note;
                 }
-                moyenne.id = sum / getVins.length;
+                moyenne.nbEtoiles = sum / getVins.length;
 
                 return moyenne;
             }

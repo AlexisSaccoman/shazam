@@ -5,7 +5,7 @@ exports.register = async(req, res) => {
     try {
         const { id, mdp } = req.query;
 
-        if(id == null || mdp == null) { // vérification des champs
+        if(id == null || mdp == null || id.length == 0 || mdp.length == 0) {
             res.status(400).send("Renseignez tous les champs !");
             return false;
         }
@@ -31,7 +31,7 @@ exports.login = async(req, res) => {
     try {
         const { id, mdp } = req.query;
 
-        if(id == null || mdp == null) {
+        if(id == null || mdp == null || id.length == 0 || mdp.length == 0) {
             res.status(400).send("Renseignez tous les champs !"); // vérification des champs
             return false;
         }
@@ -39,13 +39,35 @@ exports.login = async(req, res) => {
         const findUser = await userService.login(id, mdp); // appel au service pour le login de l'utilisateur
 
         if(findUser) {
-            res.status(200).send('Vous êtes maintenant connecté !')
+            const userInfo = await userService.findUserByName(id);
+            const response = {message: 'Vous êtes maintenant connecté !', user: userInfo};
+            res.status(200).send(response);
             return true;
         }
         else {
             res.status(400).send('Connexion échouée !')
             return false;
         }
+    }
+    catch(err) {
+        console.log('Erreur controller !' + err);
+        throw err;
+    }
+}
+
+exports.logout = async(req, res) => {
+    try {
+        const { id } = req.query;
+
+        if(id == null || id.length == 0) {
+            res.status(400).send("Renseignez tous les champs !"); // vérification des champs
+            return false;
+        }
+
+        await userService.updateStatus(id, false); // appel au service pour le login de l'utilisateur
+
+        res.status(200).send('Vous êtes maintenant déconnecté !')
+        return true;
     }
     catch(err) {
         console.log('Erreur controller !' + err);
@@ -89,15 +111,14 @@ exports.findUserById = async(req, res) => {
 
 exports.findUserByName = async(req, res) => {
     try {
-        const { id } = req.query;
+        const { name } = req.query;
 
-        if(id == null) {
+        if(name == null) {
             res.status(400).send("Renseignez tous les champs !"); // vérification des champs
             return false;
         }
 
-        const findUser = await userService.findUserByName(id); // appel au service pour rechercher l'utilisateur dans la BDD
-
+        const findUser = await userService.findUserByName(name); // appel au service pour rechercher l'utilisateur dans la BDD
         if(findUser) {
             res.status(200).send(findUser);
             return true;

@@ -6,7 +6,6 @@ const { Schema } = mongoose;
 const commentaireSchema = new Schema({
     message: {
         type: String,
-        required: true,
     },
     date: {
         type: String,
