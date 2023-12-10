@@ -9,7 +9,8 @@ class Scanner extends StatefulWidget {
   bool userIsAdmin;
   String username;
 
-  Scanner({super.key, 
+  Scanner({
+    super.key,
     required this.userConnected,
     required this.userIsAdmin,
     required this.username,
@@ -54,20 +55,30 @@ class _ScannerState extends State<Scanner> {
       // trouver le vin correspondant au code-barres scanné
       // utiliser la méthode getVin de la classe Vin pour vérifier si le vin existe avec le code EAN scanné puis afficher les détails du vin
       Vin.getVinByEAN(barcodeScanRes).then((value) => {
-        if (value == null) {
-          // afficher un message d'erreur
-          result = "This wine doesn't exist in our database"
-        } else {
-          Note.getNote(value.nom).then((noteValue) => {
-            Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DetailsVin(value, noteValue.nbEtoiles.toString(), widget.userConnected, widget.userIsAdmin, widget.username),
-            ),
-          )
-          }),
-        }
-      });
+            if (value == null)
+              {
+                // afficher un message d'erreur
+                result = "This wine doesn't exist in our database"
+              }
+            else
+              {
+                Note.getNote(value.nom).then((noteValue) => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsVin(
+                              value,
+                              noteValue == null
+                                  ? 'Pas encore noté !'
+                                  : noteValue['nbEtoiles'].toString(),
+                              widget.userConnected,
+                              widget.userIsAdmin,
+                              widget.username),
+                        ),
+                      )
+                    }),
+              }
+          });
     });
   }
 }

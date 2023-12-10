@@ -12,7 +12,8 @@ class Home extends StatelessWidget {
   final bool userIsAdmin;
   final String username;
 
-  const Home({super.key, 
+  const Home({
+    super.key,
     required this.userConnected,
     required this.userIsAdmin,
     required this.username,
@@ -22,7 +23,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double containerHeight =
-        screenHeight * 0.3; // 30% de la hauteur totale de l'écran
+        screenHeight * 0.4; // 40% de la hauteur totale de l'écran
 
     double screenWidth = MediaQuery.of(context).size.width;
     double containerWidth =
@@ -95,11 +96,12 @@ class Home extends StatelessWidget {
                       // Action à effectuer lors du clic sur le bouton => passer à l'écran de scanner
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Scanner(
+                        MaterialPageRoute(
+                            builder: (context) => Scanner(
                                   userConnected: userConnected,
                                   userIsAdmin: userIsAdmin,
                                   username: username,
-                        )),
+                                )),
                       );
                     },
                     icon: const Icon(Icons.qr_code),
@@ -123,7 +125,8 @@ class Home extends StatelessWidget {
                       // Action à effectuer lors du clic sur le bouton => passer à l'écran de settings
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Settings()),
+                        MaterialPageRoute(
+                            builder: (context) => const Settings()),
                       );
                     },
                     icon: const Icon(Icons.settings),

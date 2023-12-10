@@ -12,7 +12,7 @@ class Note {
     nbEtoiles = json['nbEtoiles'];
   }
 
-  static Future<Note> getNote(nomVin) async {
+  static Future<dynamic> getNote(nomVin) async {
     var url = Uri.parse(
         "https://pedago.univ-avignon.fr:3189/getMoyenneByVin?vin=$nomVin");
     final response = await http.get(url, headers: {
@@ -20,6 +20,9 @@ class Note {
       'Content-Type': 'application/json',
       'Accept': '*/*'
     });
-    return Note.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    if (response.body != "Pas de note trouvée !") {
+      return Note.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    }
+    return null;
   }
 }

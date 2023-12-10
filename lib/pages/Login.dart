@@ -37,7 +37,7 @@ class LoginPage extends StatelessWidget {
               ),
               // Username TextField
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: usernameController,
                   decoration: const InputDecoration(
@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
               ),
               // Password TextField
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: passwordController,
                   obscureText: true, // Pour masquer le texte du mot de passe
@@ -60,7 +60,7 @@ class LoginPage extends StatelessWidget {
               ),
               // Login/Register Button
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: ElevatedButton(
                   onPressed: () async {
                     String username = usernameController.text;
@@ -121,7 +121,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: ElevatedButton(
                   onPressed: () async {
                     String username = usernameController.text;

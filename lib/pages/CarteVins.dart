@@ -14,7 +14,8 @@ class CarteVins extends StatelessWidget {
   String note = "Pas encore noté !";
   Future<List<Vin>> futureVins = Vin.getVins();
 
-  CarteVins({super.key, 
+  CarteVins({
+    super.key,
     required this.userConnected,
     required this.userIsAdmin,
     required this.username,
@@ -89,103 +90,105 @@ class CarteVins extends StatelessWidget {
 
                 return AlertDialog(
                   title: const Text("Ajouter un vin"),
-                  content: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFormField(
-                        controller: nomController,
-                        decoration: const InputDecoration(
-                          labelText: 'Wine name',
-                          hintText: 'Enter your wine name',
+                  content: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          controller: nomController,
+                          decoration: const InputDecoration(
+                            labelText: 'Wine name',
+                            hintText: 'Enter your wine name',
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 2.0),
-                      TextFormField(
-                        controller: eanController,
-                        decoration: const InputDecoration(
-                          labelText: 'Wine EAN',
-                          hintText: 'Enter your EAN code',
+                        const SizedBox(height: 2.0),
+                        TextFormField(
+                          controller: eanController,
+                          decoration: const InputDecoration(
+                            labelText: 'Wine EAN',
+                            hintText: 'Enter your EAN code',
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 2.0),
-                      TextFormField(
-                        controller: tarifController,
-                        decoration: const InputDecoration(
-                          labelText: 'Wine price',
-                          hintText: 'Enter your wine price',
+                        const SizedBox(height: 2.0),
+                        TextFormField(
+                          controller: tarifController,
+                          decoration: const InputDecoration(
+                            labelText: 'Wine price',
+                            hintText: 'Enter your wine price',
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 2.0),
-                      TextFormField(
-                        controller: millesimeController,
-                        decoration: const InputDecoration(
-                          labelText: 'Wine vintage',
-                          hintText: 'Enter your wine vintage',
+                        const SizedBox(height: 2.0),
+                        TextFormField(
+                          controller: millesimeController,
+                          decoration: const InputDecoration(
+                            labelText: 'Wine vintage',
+                            hintText: 'Enter your wine vintage',
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 2.0),
-                      TextFormField(
-                        controller: volumeController,
-                        decoration: const InputDecoration(
-                          labelText: 'Wine volume',
-                          hintText: 'Enter your wine volume',
+                        const SizedBox(height: 2.0),
+                        TextFormField(
+                          controller: volumeController,
+                          decoration: const InputDecoration(
+                            labelText: 'Wine volume',
+                            hintText: 'Enter your wine volume',
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 2.0),
-                      TextFormField(
-                        controller: cepageController,
-                        decoration: const InputDecoration(
-                          labelText: 'Wine variety',
-                          hintText: 'Enter your wine variety',
+                        const SizedBox(height: 2.0),
+                        TextFormField(
+                          controller: cepageController,
+                          decoration: const InputDecoration(
+                            labelText: 'Wine variety',
+                            hintText: 'Enter your wine variety',
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 2.0),
-                      TextFormField(
-                        controller: teneurEnAlcoolController,
-                        decoration: const InputDecoration(
-                          labelText: 'Wine alcohol content',
-                          hintText: 'Enter your wine alcohol content',
+                        const SizedBox(height: 2.0),
+                        TextFormField(
+                          controller: teneurEnAlcoolController,
+                          decoration: const InputDecoration(
+                            labelText: 'Wine alcohol content',
+                            hintText: 'Enter your wine alcohol content',
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 2.0),
-                      DropdownButton<Domaine>(
-                        value: dropdownDomaine,
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        items: Domaine.domaines.map((item) {
-                          return DropdownMenuItem<Domaine>(
-                            value: item,
-                            child: Text(item.name),
-                          );
-                        }).toList(),
-                        onChanged: (value) => {dropdownDomaine = value},
-                      ),
-                      const SizedBox(height: 8.0),
-                      DropdownButton<Pays>(
-                        value: dropdownPays,
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        items: Pays.countries.map((item) {
-                          return DropdownMenuItem<Pays>(
-                            value: item,
-                            child: Text(item.name),
-                          );
-                        }).toList(),
-                        onChanged: (value) {
-                          dropdownPays = value;
-                        },
-                      ),
-                      const SizedBox(height: 8.0),
-                      DropdownButton<TypeVin>(
-                        value: dropdownTypeVin,
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        items: TypeVin.wineTypes.map((item) {
-                          return DropdownMenuItem<TypeVin>(
-                            value: item,
-                            child: Text(item.name),
-                          );
-                        }).toList(),
-                        onChanged: (value) => {dropdownTypeVin = value},
-                      ),
-                    ],
+                        const SizedBox(height: 2.0),
+                        DropdownButton<Domaine>(
+                          value: dropdownDomaine,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          items: Domaine.domaines.map((item) {
+                            return DropdownMenuItem<Domaine>(
+                              value: item,
+                              child: Text(item.name),
+                            );
+                          }).toList(),
+                          onChanged: (value) => {dropdownDomaine = value},
+                        ),
+                        const SizedBox(height: 8.0),
+                        DropdownButton<Pays>(
+                          value: dropdownPays,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          items: Pays.countries.map((item) {
+                            return DropdownMenuItem<Pays>(
+                              value: item,
+                              child: Text(item.name),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            dropdownPays = value;
+                          },
+                        ),
+                        const SizedBox(height: 8.0),
+                        DropdownButton<TypeVin>(
+                          value: dropdownTypeVin,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          items: TypeVin.wineTypes.map((item) {
+                            return DropdownMenuItem<TypeVin>(
+                              value: item,
+                              child: Text(item.name),
+                            );
+                          }).toList(),
+                          onChanged: (value) => {dropdownTypeVin = value},
+                        ),
+                      ],
+                    ),
                   ),
                   actions: [
                     TextButton(
@@ -289,7 +292,7 @@ class CarteVins extends StatelessWidget {
             MaterialPageRoute(
                 builder: (context) => DetailsVin(
                     wineData,
-                    wineData.note ?? "Pas encore noté",
+                    wineData.note ?? "Pas de note !",
                     userConnected,
                     userIsAdmin,
                     username)),
@@ -342,7 +345,8 @@ class CarteVins extends StatelessWidget {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: const Text("Confirm"),
-                          content: const Text("Do you want to suppress this wine ?"),
+                          content:
+                              const Text("Do you want to suppress this wine ?"),
                           actions: [
                             TextButton(
                               onPressed: () {
@@ -411,7 +415,7 @@ class CarteVins extends StatelessWidget {
     if (noteData != null) {
       return '${noteData.nbEtoiles} / 5';
     } else {
-      return 'Pas encore noté !';
+      return 'Pas de note !';
     }
   }
 
@@ -431,7 +435,7 @@ class CarteVins extends StatelessWidget {
                 wineData.note = snapshot.data!;
                 return Text(snapshot.data!);
               } else {
-                return const Text("Pas encore noté !");
+                return const Text("Pas de note !");
               }
             },
           ),
