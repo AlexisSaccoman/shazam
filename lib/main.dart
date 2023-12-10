@@ -19,8 +19,9 @@ class MyHttpOverrides extends HttpOverrides {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  final userConnected = true;
-  final userIsAdmin = true;
+  final userConnected = false;
+  final userIsAdmin = false;
+  final username = "";
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
       home: Home(
         userConnected: userConnected,
         userIsAdmin: userIsAdmin,
+        username: username,
       ),
     );
   }

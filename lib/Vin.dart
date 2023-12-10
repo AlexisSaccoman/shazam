@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'dart:io';
 
-class Vin extends HttpOverrides {
+class Vin {
   String? id;
   String? nom;
   num? tarif;
@@ -15,6 +14,7 @@ class Vin extends HttpOverrides {
   dynamic provenance;
   dynamic typeVin;
   String? ean;
+  String? note;
 
   Vin(
       {this.id,
@@ -70,6 +70,18 @@ class Vin extends HttpOverrides {
   //méthode pour supprimer un vin avec son nom
   static Future<String> deleteVin(String nom) async {
     var url = Uri.parse("https://pedago.univ-avignon.fr:3189/deleteVin?nom=$nom");
+    final response = await http.get(url, headers: {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
+    });
+    return response.body;
+  }
+
+  static Future<String> addVin(nom, ean, tarif, millesime, volume, cepage,
+      teneurEnAlcool, nomDeDomaine, provenance, typeVin) async {
+    var url = Uri.parse(
+        "https://pedago.univ-avignon.fr:3189/addVin?nom=$nom&EAN=$ean&tarif=$tarif&millesime=$millesime&volume=$volume&cepage=$cepage&teneurEnAlcool=$teneurEnAlcool&nomDeDomaine=$nomDeDomaine&provenance=$provenance&typeVin=$typeVin");
     final response = await http.get(url, headers: {
       "Access-Control-Allow-Origin": "*",
       'Content-Type': 'application/json',

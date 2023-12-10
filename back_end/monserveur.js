@@ -84,6 +84,15 @@ app.get('/deleteUser', async (req, res) => {
     }
 });
 
+app.get('/logout', async (req, res) => {
+    try {
+        await userController.logout(req, res);
+    } catch (err) {
+        console.log('Erreur logout ! ' + err);
+        throw err;
+    }
+});
+
 // opérations vin --------------------------------------
 
 app.get('/addVin', async (req, res) => {

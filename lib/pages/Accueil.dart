@@ -10,10 +10,12 @@ class Home extends StatelessWidget {
   // on récupère les données passées en paramètre
   final bool userConnected;
   final bool userIsAdmin;
+  final String username;
 
   const Home({super.key, 
     required this.userConnected,
     required this.userIsAdmin,
+    required this.username,
   });
 
   @override
@@ -31,7 +33,7 @@ class Home extends StatelessWidget {
     double buttonHeight = 40;
 
     // space between buttons
-    double spaceBetweenButtons = 20;
+    double spaceBetweenButtons = 10;
 
     return Scaffold(
       appBar: AppBar(
@@ -68,6 +70,7 @@ class Home extends StatelessWidget {
                             builder: (context) => CarteVins(
                                   userConnected: userConnected,
                                   userIsAdmin: userIsAdmin,
+                                  username: username,
                                 )),
                       );
                     },
@@ -133,27 +136,27 @@ class Home extends StatelessWidget {
 
                   // Espacement vertical de 20 pixels
                   SizedBox(height: spaceBetweenButtons),
-
-                  // Buttton => Login/Resgister
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      // Action à effectuer lors du clic sur le bouton => passer à l'écran de login/register
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
-                      );
-                    },
-                    icon: const Icon(Icons.people),
-                    label: const Text("Login/Register",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        )),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
-                      minimumSize: Size(buttonWidth, buttonHeight),
+                  if (!userConnected)
+                    // Buttton => Login/Resgister
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        // Action à effectuer lors du clic sur le bouton => passer à l'écran de login/register
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginPage()),
+                        );
+                      },
+                      icon: const Icon(Icons.people),
+                      label: const Text("Login/Register",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange,
+                        minimumSize: Size(buttonWidth, buttonHeight),
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),

@@ -1,20 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:shazam/Vin.dart';
 import 'DetailsVin.dart';
+import 'package:shazam/Note.dart';
+import 'package:shazam/Domaine.dart';
+import 'package:shazam/typeVin.dart';
+import 'package:shazam/Pays.dart';
 
 class CarteVins extends StatelessWidget {
   // on récupère les données passées en paramètre
-  final bool userConnected;
-  final bool userIsAdmin;
+  bool userConnected;
+  bool userIsAdmin;
+  String username;
+  String note = "Pas encore noté !";
   Future<List<Vin>> futureVins = Vin.getVins();
 
   CarteVins({super.key, 
     required this.userConnected,
     required this.userIsAdmin,
+    required this.username,
   });
 
   @override
   Widget build(BuildContext context) {
+    Domaine? dropdownDomaine =
+        Domaine.ARLenoble; // valeurs par défaut des listes déroulantes
+    Pays? dropdownPays = Pays.France;
+    TypeVin? dropdownTypeVin = TypeVin.VinBlanc;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Wine Card'),
@@ -29,7 +40,6 @@ class CarteVins extends StatelessWidget {
               // until data is fetched, show loader
               return const CircularProgressIndicator();
             } else if (snapshot.hasData) {
-              // once data is fetched, display it on screen (call buildPosts())
               final vins = snapshot.data!;
               return ListView.builder(
                 itemCount: vins.length,
@@ -40,7 +50,8 @@ class CarteVins extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DetailsVin(vins[index]),
+                          builder: (context) => DetailsVin(vins[index], note,
+                              userConnected, userIsAdmin, username),
                         ),
                       );
                     },
@@ -55,30 +66,219 @@ class CarteVins extends StatelessWidget {
           },
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.wine_bar),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                final TextEditingController nomController =
+                    TextEditingController(text: "");
+                final TextEditingController eanController =
+                    TextEditingController(text: "");
+                final TextEditingController tarifController =
+                    TextEditingController(text: "");
+                final TextEditingController millesimeController =
+                    TextEditingController(text: "");
+                final TextEditingController volumeController =
+                    TextEditingController(text: "");
+                final TextEditingController cepageController =
+                    TextEditingController(text: "");
+                final TextEditingController teneurEnAlcoolController =
+                    TextEditingController(text: "");
+
+                return AlertDialog(
+                  title: const Text("Ajouter un vin"),
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextFormField(
+                        controller: nomController,
+                        decoration: const InputDecoration(
+                          labelText: 'Wine name',
+                          hintText: 'Enter your wine name',
+                        ),
+                      ),
+                      const SizedBox(height: 2.0),
+                      TextFormField(
+                        controller: eanController,
+                        decoration: const InputDecoration(
+                          labelText: 'Wine EAN',
+                          hintText: 'Enter your EAN code',
+                        ),
+                      ),
+                      const SizedBox(height: 2.0),
+                      TextFormField(
+                        controller: tarifController,
+                        decoration: const InputDecoration(
+                          labelText: 'Wine price',
+                          hintText: 'Enter your wine price',
+                        ),
+                      ),
+                      const SizedBox(height: 2.0),
+                      TextFormField(
+                        controller: millesimeController,
+                        decoration: const InputDecoration(
+                          labelText: 'Wine vintage',
+                          hintText: 'Enter your wine vintage',
+                        ),
+                      ),
+                      const SizedBox(height: 2.0),
+                      TextFormField(
+                        controller: volumeController,
+                        decoration: const InputDecoration(
+                          labelText: 'Wine volume',
+                          hintText: 'Enter your wine volume',
+                        ),
+                      ),
+                      const SizedBox(height: 2.0),
+                      TextFormField(
+                        controller: cepageController,
+                        decoration: const InputDecoration(
+                          labelText: 'Wine variety',
+                          hintText: 'Enter your wine variety',
+                        ),
+                      ),
+                      const SizedBox(height: 2.0),
+                      TextFormField(
+                        controller: teneurEnAlcoolController,
+                        decoration: const InputDecoration(
+                          labelText: 'Wine alcohol content',
+                          hintText: 'Enter your wine alcohol content',
+                        ),
+                      ),
+                      const SizedBox(height: 2.0),
+                      DropdownButton<Domaine>(
+                        value: dropdownDomaine,
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        items: Domaine.domaines.map((item) {
+                          return DropdownMenuItem<Domaine>(
+                            value: item,
+                            child: Text(item.name),
+                          );
+                        }).toList(),
+                        onChanged: (value) => {dropdownDomaine = value},
+                      ),
+                      const SizedBox(height: 8.0),
+                      DropdownButton<Pays>(
+                        value: dropdownPays,
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        items: Pays.countries.map((item) {
+                          return DropdownMenuItem<Pays>(
+                            value: item,
+                            child: Text(item.name),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          dropdownPays = value;
+                        },
+                      ),
+                      const SizedBox(height: 8.0),
+                      DropdownButton<TypeVin>(
+                        value: dropdownTypeVin,
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        items: TypeVin.wineTypes.map((item) {
+                          return DropdownMenuItem<TypeVin>(
+                            value: item,
+                            child: Text(item.name),
+                          );
+                        }).toList(),
+                        onChanged: (value) => {dropdownTypeVin = value},
+                      ),
+                    ],
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("Annuler"),
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        try {
+                          final response = await Vin.addVin(
+                              nomController.text,
+                              eanController.text,
+                              tarifController.text,
+                              millesimeController.text,
+                              volumeController.text,
+                              cepageController.text,
+                              teneurEnAlcoolController.text,
+                              dropdownDomaine.toString().replaceAll(' ', ''),
+                              dropdownPays.toString().replaceAll(' ', ''),
+                              dropdownTypeVin.toString().replaceAll(' ', ''));
+
+                          if (response.contains("Vin ajouté !")) {
+                            Navigator.of(context).pop();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CarteVins(
+                                  userConnected: userConnected,
+                                  userIsAdmin: userIsAdmin,
+                                  username: username,
+                                ),
+                              ),
+                            );
+                            // Display success message
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Vin ajouté !'),
+                                backgroundColor: Colors.green,
+                              ),
+                            );
+                          } else {
+                            // Display error message
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(response),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
+                        } catch (e) {
+                          // Handle exceptions during the deletion process
+                          print("Error: $e");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Erreur pendant la modification !"),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      },
+                      child: const Text("Enregistrer"),
+                    ),
+                  ],
+                );
+              });
+        },
+      ),
     );
   }
 
   Widget _buildWineCard(BuildContext context, Vin wineData) {
     Color couleur;
     switch (wineData.typeVin['name']) {
-      case 'Vin blanc':
+      case 'Vin blanc' || 'Vin Blanc':
         couleur = const Color.fromARGB(255, 173, 184, 0);
         break;
-      case 'Vin rouge':
+      case 'Vin rouge' || 'Vin Rouge':
         couleur = const Color.fromARGB(255, 128, 0, 0);
         break;
-      case 'Vin rosé':
+      case 'Vin rosé' || 'Vin Rose':
         couleur = const Color.fromARGB(255, 255, 0, 85);
         break;
-      case 'Vin noir':
+      case 'Vin noir' || 'Vin Dessert':
         couleur = const Color.fromARGB(255, 0, 0, 0);
         break;
-      case 'Vin jaune':
+      case 'Vin jaune' || 'Vin Mousseux':
         couleur = const Color.fromARGB(255, 255, 255, 0);
         break;
 
       default:
-        couleur = Colors.white; // Couleur par défaut
+        couleur = Colors.blue; // Couleur par défaut
     }
 
     return Card(
@@ -86,7 +286,13 @@ class CarteVins extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => DetailsVin(wineData)),
+            MaterialPageRoute(
+                builder: (context) => DetailsVin(
+                    wineData,
+                    wineData.note ?? "Pas encore noté !",
+                    userConnected,
+                    userIsAdmin,
+                    username)),
           );
         },
         child: Padding(
@@ -116,7 +322,7 @@ class CarteVins extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildWineRating(5),
+                        _buildWineRating(wineData),
                         _buildWinePrice(wineData.tarif!),
                       ],
                     ),
@@ -198,14 +404,37 @@ class CarteVins extends StatelessWidget {
     );
   }
 
-  Widget _buildWineRating(double note) {
+  Future<String> _getWineRating(String nom) async {
+    // Assuming Note.getNote returns a Future<Note>
+    Note? noteData = await Note.getNote(nom);
+
+    if (noteData != null) {
+      return '${noteData.nbEtoiles} / 5';
+    } else {
+      return 'Pas encore noté !';
+    }
+  }
+
+  Widget _buildWineRating(Vin wineData) {
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: const BoxDecoration(),
       child: Row(
         children: [
           const Icon(Icons.star, color: Colors.yellow),
-          Text('$note / 5'),
+          FutureBuilder<String>(
+            future: _getWineRating(wineData.nom!),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasData) {
+                wineData.note = snapshot.data!;
+                return Text(snapshot.data!);
+              } else {
+                return const Text("Pas encore noté !");
+              }
+            },
+          ),
         ],
       ),
     );

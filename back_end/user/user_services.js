@@ -22,6 +22,20 @@ class UserService {
         }
     }
 
+    static async updateStatus(id, status) {
+        userModel.updateOne({ // modification du commentaire à partir de l'id du commentaire renseigné
+            identifiant: id
+        }, {
+            $set: {
+                isConnected: status,
+            }
+        }).then(() => {
+            return true;
+        }).catch(() => {
+            return "Erreur dans l'update !";
+        });
+    }
+
     static async login(id, mdp) {
         try {
             const cryptedMdp = crypto.createHash('sha1').update(mdp).digest('hex'); // mdp crypté en SHA-1
@@ -31,7 +45,7 @@ class UserService {
             }
 
             const findUser = await userModel.findOne(query).exec(); // recherche d'une correspondance (login,mdp) dans la BDD
-
+            this.updateStatus(id, true);
             if(findUser) {
                 return true;
             }
@@ -60,10 +74,10 @@ class UserService {
         }
     }
 
-    static async findUserByName(id) {
+    static async findUserByName(name) {
         try {
             const query = {
-                identifiant: id,
+                identifiant: name,
             }
             const findUser = await userModel.findOne(query).exec(); // recherche d'un utilisateur ayant l'id saisi dans la BDD
 

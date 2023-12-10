@@ -34,4 +34,26 @@ class Utilisateur {
     final List body = json.decode(response.body);
     return body.map((e) => Utilisateur.fromJson(e)).toList();
   }
+
+  static Future<String> login(id, mdp) async {
+    var url =
+        Uri.parse("https://pedago.univ-avignon.fr:3189/login?id=$id&mdp=$mdp");
+    final response = await http.get(url, headers: {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
+    });
+    return response.body;
+  }
+
+  static Future<String> register(id, mdp) async {
+    var url = Uri.parse(
+        "https://pedago.univ-avignon.fr:3189/register?id=$id&mdp=$mdp");
+    final response = await http.get(url, headers: {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
+    });
+    return response.body;
+  }
 }
