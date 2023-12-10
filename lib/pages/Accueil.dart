@@ -33,7 +33,7 @@ class Home extends StatelessWidget {
     double buttonHeight = 40;
 
     // space between buttons
-    double spaceBetweenButtons = 20;
+    double spaceBetweenButtons = 10;
 
     return Scaffold(
       appBar: AppBar(

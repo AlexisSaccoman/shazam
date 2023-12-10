@@ -54,4 +54,16 @@ class Vin {
     final List body = json.decode(response.body);
     return body.map((e) => Vin.fromJson(e)).toList();
   }
+
+  static Future<String> addVin(nom, ean, tarif, millesime, volume, cepage,
+      teneurEnAlcool, nomDeDomaine, provenance, typeVin) async {
+    var url = Uri.parse(
+        "https://pedago.univ-avignon.fr:3189/addVin?nom=$nom&EAN=$ean&tarif=$tarif&millesime=$millesime&volume=$volume&cepage=$cepage&teneurEnAlcool=$teneurEnAlcool&nomDeDomaine=$nomDeDomaine&provenance=$provenance&typeVin=$typeVin");
+    final response = await http.get(url, headers: {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
+    });
+    return response.body;
+  }
 }

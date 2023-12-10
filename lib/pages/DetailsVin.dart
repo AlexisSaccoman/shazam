@@ -37,23 +37,23 @@ class _DetailsVinState extends State<DetailsVin> {
     Color couleur;
 
     switch (widget.wineData.typeVin['name']) {
-      case 'Vin blanc':
+      case 'Vin blanc' || 'Vin Blanc':
         couleur = const Color.fromARGB(255, 173, 184, 0);
         break;
-      case 'Vin rouge':
+      case 'Vin rouge' || 'Vin Rouge':
         couleur = const Color.fromARGB(255, 128, 0, 0);
         break;
-      case 'Vin rosé':
+      case 'Vin rosé' || 'Vin Rose':
         couleur = const Color.fromARGB(255, 255, 0, 85);
         break;
-      case 'noir':
+      case 'Vin noir' || 'Vin Dessert':
         couleur = const Color.fromARGB(255, 0, 0, 0);
         break;
-      case 'jaune':
+      case 'Vin jaune' || 'Vin Mousseux':
         couleur = const Color.fromARGB(255, 255, 255, 0);
         break;
       default:
-        couleur = Colors.white; // Couleur par défaut
+        couleur = Colors.blue; // Couleur par défaut
     }
 
     return Scaffold(
