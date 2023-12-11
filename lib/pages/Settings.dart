@@ -70,6 +70,12 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                 );
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Vous êtes maintenant déconnecté !"),
+                    backgroundColor: Colors.green,
+                  ),
+                );
               },
               child: const Text('Logout'),
             ),
