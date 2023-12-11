@@ -126,7 +126,10 @@ class Home extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Settings()),
+                            builder: (context) => Settings(
+                                userConnected: userConnected,
+                                userIsAdmin: userIsAdmin,
+                                username: username)),
                       );
                     },
                     icon: const Icon(Icons.settings),

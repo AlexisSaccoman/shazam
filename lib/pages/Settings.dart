@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'Accueil.dart';
 
 class Settings extends StatefulWidget {
-  const Settings({super.key});
+  final bool userConnected;
+  final bool userIsAdmin;
+  final String username;
+
+  const Settings(
+      {super.key,
+      required this.userConnected,
+      required this.userIsAdmin,
+      required this.username});
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -58,27 +66,28 @@ class _SettingsState extends State<Settings> {
             ),
             const SizedBox(height: 4.0),
 
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Home(
-                      userConnected: false,
-                      userIsAdmin: false,
-                      username: "",
+            if (widget.userConnected)
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Home(
+                        userConnected: false,
+                        userIsAdmin: false,
+                        username: "",
+                      ),
                     ),
-                  ),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("Vous êtes maintenant déconnecté !"),
-                    backgroundColor: Colors.green,
-                  ),
-                );
-              },
-              child: const Text('Logout'),
-            ),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Vous êtes maintenant déconnecté !"),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                },
+                child: const Text('Logout'),
+              ),
           ],
         ),
       ),
