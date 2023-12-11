@@ -70,7 +70,7 @@ class _ScannerState extends State<Scanner> {
                               value,
                               noteValue == null
                                   ? 'Pas encore noté !'
-                                  : noteValue['nbEtoiles'].toString(),
+                                  : noteValue.nbEtoiles.toString(),
                               widget.userConnected,
                               widget.userIsAdmin,
                               widget.username),

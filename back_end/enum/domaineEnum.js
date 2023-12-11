@@ -1,14 +1,13 @@
 class Domaine {
-    static ChateauMalartic = new Domaine('Château Malartic Lagravière');
-    static ChateauSmith = new Domaine('Château Smith Haut Lafitte');
-    static ChateauPommard = new Domaine('Château de Pommard');
-    static ChampagneCharles = new Domaine('Champagne Charles Mignon');
+    static ChateauMalartic = new Domaine('Chateau Malartic');
+    static ChampagneCharles = new Domaine('Champagne Charles');
     static ARLenoble = new Domaine('AR Lenoble');
-    static ChateauTracy = new Domaine('Château de Tracy');
-    static ChateauRomanin = new Domaine('Château Romanin');
-    static CommanderiePeyrassol = new Domaine('Commanderie de Peyrassol');
-    static ChateauMontus = new Domaine('Châteaux Montus et Bouscassé');
-    static ChateauBeaubois = new Domaine('Château Beaubois');
+    static ChateauTracy = new Domaine('Chateau Tracy');
+    static ChateauRomanin = new Domaine('Chateau Romanin');
+    static CommanderiePeyrassol = new Domaine('Commanderie Peyrassol');
+    static ChateauMontus = new Domaine('Chateaux Montus');
+    static ChateauBeaubois = new Domaine('Chateau Beaubois');
+    static Pernaud = new Domaine('Pernaud');
 
     constructor(name) {
         this.name = name;

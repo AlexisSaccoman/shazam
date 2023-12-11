@@ -67,197 +67,204 @@ class CarteVins extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.wine_bar),
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                final TextEditingController nomController =
-                    TextEditingController(text: "");
-                final TextEditingController eanController =
-                    TextEditingController(text: "");
-                final TextEditingController tarifController =
-                    TextEditingController(text: "");
-                final TextEditingController millesimeController =
-                    TextEditingController(text: "");
-                final TextEditingController volumeController =
-                    TextEditingController(text: "");
-                final TextEditingController cepageController =
-                    TextEditingController(text: "");
-                final TextEditingController teneurEnAlcoolController =
-                    TextEditingController(text: "");
+      floatingActionButton: userIsAdmin == true
+          ? FloatingActionButton(
+              child: Icon(Icons.wine_bar),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      final TextEditingController nomController =
+                          TextEditingController(text: "");
+                      final TextEditingController eanController =
+                          TextEditingController(text: "");
+                      final TextEditingController tarifController =
+                          TextEditingController(text: "");
+                      final TextEditingController millesimeController =
+                          TextEditingController(text: "");
+                      final TextEditingController volumeController =
+                          TextEditingController(text: "");
+                      final TextEditingController cepageController =
+                          TextEditingController(text: "");
+                      final TextEditingController teneurEnAlcoolController =
+                          TextEditingController(text: "");
 
-                return AlertDialog(
-                  title: const Text("Ajouter un vin"),
-                  content: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextFormField(
-                          controller: nomController,
-                          decoration: const InputDecoration(
-                            labelText: 'Wine name',
-                            hintText: 'Enter your wine name',
-                          ),
-                        ),
-                        const SizedBox(height: 2.0),
-                        TextFormField(
-                          controller: eanController,
-                          decoration: const InputDecoration(
-                            labelText: 'Wine EAN',
-                            hintText: 'Enter your EAN code',
-                          ),
-                        ),
-                        const SizedBox(height: 2.0),
-                        TextFormField(
-                          controller: tarifController,
-                          decoration: const InputDecoration(
-                            labelText: 'Wine price',
-                            hintText: 'Enter your wine price',
-                          ),
-                        ),
-                        const SizedBox(height: 2.0),
-                        TextFormField(
-                          controller: millesimeController,
-                          decoration: const InputDecoration(
-                            labelText: 'Wine vintage',
-                            hintText: 'Enter your wine vintage',
-                          ),
-                        ),
-                        const SizedBox(height: 2.0),
-                        TextFormField(
-                          controller: volumeController,
-                          decoration: const InputDecoration(
-                            labelText: 'Wine volume',
-                            hintText: 'Enter your wine volume',
-                          ),
-                        ),
-                        const SizedBox(height: 2.0),
-                        TextFormField(
-                          controller: cepageController,
-                          decoration: const InputDecoration(
-                            labelText: 'Wine variety',
-                            hintText: 'Enter your wine variety',
-                          ),
-                        ),
-                        const SizedBox(height: 2.0),
-                        TextFormField(
-                          controller: teneurEnAlcoolController,
-                          decoration: const InputDecoration(
-                            labelText: 'Wine alcohol content',
-                            hintText: 'Enter your wine alcohol content',
-                          ),
-                        ),
-                        const SizedBox(height: 2.0),
-                        DropdownButton<Domaine>(
-                          value: dropdownDomaine,
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          items: Domaine.domaines.map((item) {
-                            return DropdownMenuItem<Domaine>(
-                              value: item,
-                              child: Text(item.name),
-                            );
-                          }).toList(),
-                          onChanged: (value) => {dropdownDomaine = value},
-                        ),
-                        const SizedBox(height: 8.0),
-                        DropdownButton<Pays>(
-                          value: dropdownPays,
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          items: Pays.countries.map((item) {
-                            return DropdownMenuItem<Pays>(
-                              value: item,
-                              child: Text(item.name),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            dropdownPays = value;
-                          },
-                        ),
-                        const SizedBox(height: 8.0),
-                        DropdownButton<TypeVin>(
-                          value: dropdownTypeVin,
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          items: TypeVin.wineTypes.map((item) {
-                            return DropdownMenuItem<TypeVin>(
-                              value: item,
-                              child: Text(item.name),
-                            );
-                          }).toList(),
-                          onChanged: (value) => {dropdownTypeVin = value},
-                        ),
-                      ],
-                    ),
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text("Annuler"),
-                    ),
-                    TextButton(
-                      onPressed: () async {
-                        try {
-                          final response = await Vin.addVin(
-                              nomController.text,
-                              eanController.text,
-                              tarifController.text,
-                              millesimeController.text,
-                              volumeController.text,
-                              cepageController.text,
-                              teneurEnAlcoolController.text,
-                              dropdownDomaine.toString().replaceAll(' ', ''),
-                              dropdownPays.toString().replaceAll(' ', ''),
-                              dropdownTypeVin.toString().replaceAll(' ', ''));
-
-                          if (response.contains("Vin ajouté !")) {
-                            Navigator.of(context).pop();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CarteVins(
-                                  userConnected: userConnected,
-                                  userIsAdmin: userIsAdmin,
-                                  username: username,
+                      return AlertDialog(
+                        title: const Text("Ajouter un vin"),
+                        content: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextFormField(
+                                controller: nomController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Wine name',
+                                  hintText: 'Enter your wine name',
                                 ),
                               ),
-                            );
-                            // Display success message
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Vin ajouté !'),
-                                backgroundColor: Colors.green,
+                              const SizedBox(height: 2.0),
+                              TextFormField(
+                                controller: eanController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Wine EAN',
+                                  hintText: 'Enter your EAN code',
+                                ),
                               ),
-                            );
-                          } else {
-                            // Display error message
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(response),
-                                backgroundColor: Colors.red,
+                              const SizedBox(height: 2.0),
+                              TextFormField(
+                                controller: tarifController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Wine price',
+                                  hintText: 'Enter your wine price',
+                                ),
                               ),
-                            );
-                          }
-                        } catch (e) {
-                          // Handle exceptions during the deletion process
-                          print("Error: $e");
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Erreur pendant la modification !"),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        }
-                      },
-                      child: const Text("Enregistrer"),
-                    ),
-                  ],
-                );
-              });
-        },
-      ),
+                              const SizedBox(height: 2.0),
+                              TextFormField(
+                                controller: millesimeController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Wine vintage',
+                                  hintText: 'Enter your wine vintage',
+                                ),
+                              ),
+                              const SizedBox(height: 2.0),
+                              TextFormField(
+                                controller: volumeController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Wine volume',
+                                  hintText: 'Enter your wine volume',
+                                ),
+                              ),
+                              const SizedBox(height: 2.0),
+                              TextFormField(
+                                controller: cepageController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Wine variety',
+                                  hintText: 'Enter your wine variety',
+                                ),
+                              ),
+                              const SizedBox(height: 2.0),
+                              TextFormField(
+                                controller: teneurEnAlcoolController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Wine alcohol content',
+                                  hintText: 'Enter your wine alcohol content',
+                                ),
+                              ),
+                              const SizedBox(height: 2.0),
+                              DropdownButton<Domaine>(
+                                value: dropdownDomaine,
+                                icon: const Icon(Icons.keyboard_arrow_down),
+                                items: Domaine.domaines.map((item) {
+                                  return DropdownMenuItem<Domaine>(
+                                    value: item,
+                                    child: Text(item.name),
+                                  );
+                                }).toList(),
+                                onChanged: (value) => {dropdownDomaine = value},
+                              ),
+                              const SizedBox(height: 8.0),
+                              DropdownButton<Pays>(
+                                value: dropdownPays,
+                                icon: const Icon(Icons.keyboard_arrow_down),
+                                items: Pays.countries.map((item) {
+                                  return DropdownMenuItem<Pays>(
+                                    value: item,
+                                    child: Text(item.name),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  dropdownPays = value;
+                                },
+                              ),
+                              const SizedBox(height: 8.0),
+                              DropdownButton<TypeVin>(
+                                value: dropdownTypeVin,
+                                icon: const Icon(Icons.keyboard_arrow_down),
+                                items: TypeVin.wineTypes.map((item) {
+                                  return DropdownMenuItem<TypeVin>(
+                                    value: item,
+                                    child: Text(item.name),
+                                  );
+                                }).toList(),
+                                onChanged: (value) => {dropdownTypeVin = value},
+                              ),
+                            ],
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("Annuler"),
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                              try {
+                                final response = await Vin.addVin(
+                                    nomController.text,
+                                    eanController.text,
+                                    tarifController.text,
+                                    millesimeController.text,
+                                    volumeController.text,
+                                    cepageController.text,
+                                    teneurEnAlcoolController.text,
+                                    dropdownDomaine
+                                        .toString()
+                                        .replaceAll(' ', ''),
+                                    dropdownPays.toString().replaceAll(' ', ''),
+                                    dropdownTypeVin
+                                        .toString()
+                                        .replaceAll(' ', ''));
+
+                                if (response.contains("Vin ajouté !")) {
+                                  Navigator.of(context).pop();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CarteVins(
+                                        userConnected: userConnected,
+                                        userIsAdmin: userIsAdmin,
+                                        username: username,
+                                      ),
+                                    ),
+                                  );
+                                  // Display success message
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Vin ajouté !'),
+                                      backgroundColor: Colors.green,
+                                    ),
+                                  );
+                                } else {
+                                  // Display error message
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(response),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                              } catch (e) {
+                                // Handle exceptions during the deletion process
+                                print("Error: $e");
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        "Erreur pendant la modification !"),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              }
+                            },
+                            child: const Text("Enregistrer"),
+                          ),
+                        ],
+                      );
+                    });
+              },
+            )
+          : null,
     );
   }
 

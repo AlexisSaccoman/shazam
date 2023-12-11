@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Accueil.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -10,7 +11,8 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class _SettingsState extends State<Settings> {
         title: const Text('Settings'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -28,7 +30,7 @@ class _SettingsState extends State<Settings> {
               controller: _usernameController,
               decoration: const InputDecoration(labelText: 'Username'),
             ),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 8.0),
 
             // Password
             TextFormField(
@@ -36,7 +38,7 @@ class _SettingsState extends State<Settings> {
               obscureText: true,
               decoration: const InputDecoration(labelText: 'Password'),
             ),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 8.0),
 
             // Confirm Password
             TextFormField(
@@ -44,7 +46,7 @@ class _SettingsState extends State<Settings> {
               obscureText: true,
               decoration: const InputDecoration(labelText: 'Confirm Password'),
             ),
-            const SizedBox(height: 32.0),
+            const SizedBox(height: 8.0),
 
             // Save Button
             ElevatedButton(
@@ -53,6 +55,23 @@ class _SettingsState extends State<Settings> {
                 saveSettings();
               },
               child: const Text('Save'),
+            ),
+            const SizedBox(height: 4.0),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Home(
+                      userConnected: false,
+                      userIsAdmin: false,
+                      username: "",
+                    ),
+                  ),
+                );
+              },
+              child: const Text('Logout'),
             ),
           ],
         ),

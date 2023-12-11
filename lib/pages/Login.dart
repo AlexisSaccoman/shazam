@@ -90,7 +90,7 @@ class LoginPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => CarteVins(
+                            builder: (context) => Home(
                               userConnected: userConnected,
                               userIsAdmin: userIsAdmin,
                               username: username,

@@ -4,13 +4,13 @@ const userService = require('../user/user_services');
 exports.addVin = async(req, res) => {
     try {
         const { nom, descriptif, EAN, tarif, millesime, volume, cepage, allergenes, teneurEnAlcool, imgURL, nomDeDomaine, provenance, typeVin } = req.query;
-        if(nom == null || tarif == null || EAN == null) {
+        if(nom == null || tarif == null || EAN == null || nom.length == 0 || tarif.length == 0 || EAN.length == 0) {
             res.status(400).send("Renseignez le nom, le tarif et l'EAN !");
             return false;
         }
         const addVin = await vinService.addVin(nom, descriptif, EAN, millesime, tarif, volume, cepage, allergenes, teneurEnAlcool, imgURL, nomDeDomaine, provenance, typeVin); // appel au service pour l'ajout du vin
 
-        if(addVin != "Domaine incorrect !" && addVin != "Pays incorrect !" && addVin != "Type incorrect !" && addVin != "Millesime incorrect !") { // verification des champs
+        if(addVin != "Domaine incorrect !" && addVin != "Pays incorrect !" && addVin != "Type incorrect !" && addVin != "Millesime incorrect !" && addVin != "Le tarif, le millesime et le volume doivent-être des nombres !" && addVin != "L'EAN doit comporter 13 chiffres !") { // verification des champs
             res.status(200).send('Vin ajouté !');
             return true;
         }

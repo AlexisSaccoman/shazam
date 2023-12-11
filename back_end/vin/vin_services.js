@@ -8,6 +8,12 @@ class vinService {
         const findDomaine = Domaine[nomDeDomaine];
         const findPays = Pays[provenance];
         const findType = TypeVin[typeVin];
+        if (isNaN(tarif) || isNaN(millesime) || isNaN(volume)) {
+            return "Le tarif, le millesime et le volume doivent-être des nombres !";
+          }
+          if(EAN.length != 13) {
+            return "L'EAN doit comporter 13 chiffres !";
+          }
         if(!(findDomaine instanceof Domaine)) { // si les champs renseignés ne font pas parti de la liste de pays/nom de domaine/type de vin parmi mes Enum 
             return "Domaine incorrect !";
         }
@@ -29,7 +35,6 @@ class vinService {
                 tarif: tarif,
                 volume: volume,
                 cepage: cepage, 
-                allergenes: allergenes.split(","),
                 teneurEnAlcool: teneurEnAlcool,
                 imgURL: imgURL,
                 nomDeDomaine: findDomaine,
