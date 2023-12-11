@@ -57,7 +57,8 @@ class Vin {
 
   // méthode pour récupérer un vin par son code EAN
   static Future<Vin> getVinByEAN(String ean) async {
-    var url = Uri.parse("https://pedago.univ-avignon.fr:3189/findVinByEAN?ean=$ean");
+    var url =
+        Uri.parse("https://pedago.univ-avignon.fr:3189/findVinByEAN?ean=$ean");
     final response = await http.get(url, headers: {
       "Access-Control-Allow-Origin": "*",
       'Content-Type': 'application/json',
@@ -69,7 +70,8 @@ class Vin {
 
   //méthode pour supprimer un vin avec son nom
   static Future<String> deleteVin(String nom) async {
-    var url = Uri.parse("https://pedago.univ-avignon.fr:3189/deleteVin?nom=$nom");
+    var url =
+        Uri.parse("https://pedago.univ-avignon.fr:3189/deleteVin?nom=$nom");
     final response = await http.get(url, headers: {
       "Access-Control-Allow-Origin": "*",
       'Content-Type': 'application/json',
@@ -82,6 +84,19 @@ class Vin {
       teneurEnAlcool, nomDeDomaine, provenance, typeVin) async {
     var url = Uri.parse(
         "https://pedago.univ-avignon.fr:3189/addVin?nom=$nom&EAN=$ean&tarif=$tarif&millesime=$millesime&volume=$volume&cepage=$cepage&teneurEnAlcool=$teneurEnAlcool&nomDeDomaine=$nomDeDomaine&provenance=$provenance&typeVin=$typeVin");
+    final response = await http.get(url, headers: {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
+    });
+    return response.body;
+  }
+
+  static Future<String> updateVin(nom, nouveauNom, tarif, millesime, volume,
+      cepage, teneurEnAlcool, nomDeDomaine, provenance, typeVin) async {
+    var url = Uri.parse(
+        "https://pedago.univ-avignon.fr:3189/updateVin?nom=$nom&nouveauNom=$nouveauNom&tarif=$tarif&millesime=$millesime&volume=$volume&cepage=$cepage&teneurEnAlcool=$teneurEnAlcool&nomDeDomaine=$nomDeDomaine&provenance=$provenance&typeVin=$typeVin");
+    print(url);
     final response = await http.get(url, headers: {
       "Access-Control-Allow-Origin": "*",
       'Content-Type': 'application/json',
