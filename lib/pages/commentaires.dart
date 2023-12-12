@@ -70,62 +70,90 @@ class CommentairesListe extends StatelessWidget {
 
   static Future<List<Commentaire>> getCommentaires(nom) async {
     var url = Uri.parse(
-        "https://pedago.univ-avignon.fr:3189/findCommentaireByVinName?nom=$nom");
-    final response = await http.get(url, headers: {
-      "Access-Control-Allow-Origin": "*",
-      'Content-Type': 'application/json',
-      'Accept': '*/*'
-    });
+        "https://pedago.univ-avignon.fr:3189/findCommentaireByVinName");
+    final response = await http.post(url,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
+        },
+        body: jsonEncode(<String, String>{
+          'nom': nom,
+        }));
     final List body = json.decode(response.body);
     return body.map((e) => Commentaire.fromJson(e)).toList();
   }
 
   static Future<String> postCommentaire(message, nomVin, username, note) async {
-    var url;
+    var url = Uri.parse("https://pedago.univ-avignon.fr:3189/addCommentaire");
+    var body;
     if (note == null) {
-      url = Uri.parse(
-          "https://pedago.univ-avignon.fr:3189/addCommentaire?message=$message&vin=$nomVin&id=$username");
+      body = jsonEncode(<String, String>{
+        'message': message,
+        'nomVin': nomVin,
+        'username': username,
+      });
     } else {
-      url = Uri.parse(
-          "https://pedago.univ-avignon.fr:3189/addCommentaire?message=$message&vin=$nomVin&id=$username&note=$note");
+      body = jsonEncode({
+        'message': message,
+        'vin': nomVin,
+        'id': username,
+        'note': note,
+      });
     }
-    final response = await http.get(url, headers: {
-      "Access-Control-Allow-Origin": "*",
-      'Content-Type': 'application/json',
-      'Accept': '*/*'
-    });
+    print("$message, $nomVin, $username, $note");
+    final response = await http.post(url,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
+        },
+        body: body);
     return response.body;
   }
 
   static Future<String> deleteCommentaire(id) async {
-    var url = Uri.parse(
-        "https://pedago.univ-avignon.fr:3189/deleteCommentaire?_id=$id");
-    final response = await http.get(url, headers: {
-      "Access-Control-Allow-Origin": "*",
-      'Content-Type': 'application/json',
-      'Accept': '*/*'
-    });
+    var url =
+        Uri.parse("https://pedago.univ-avignon.fr:3189/deleteCommentaire");
+    final response = await http.post(url,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
+        },
+        body: jsonEncode(<String, String>{
+          '_id': id,
+        }));
     return response.body;
   }
 
   static Future<String> updateCommentaire(id, message, note) async {
-    var url;
+    var url =
+        Uri.parse("https://pedago.univ-avignon.fr:3189/updateCommentaire");
+    var body;
     if (note == null ||
         note == "null" ||
         note == "Pas encore noté !" ||
         note == "") {
-      url = Uri.parse(
-          "https://pedago.univ-avignon.fr:3189/updateCommentaire?_id=$id&message=$message");
+      body = jsonEncode(<String, String>{
+        '_id': id,
+        'message': message,
+      });
     } else {
-      url = Uri.parse(
-          "https://pedago.univ-avignon.fr:3189/updateCommentaire?_id=$id&message=$message&note=$note");
+      body = jsonEncode(<String, String>{
+        '_id': id,
+        'message': message,
+        'note': note,
+      });
     }
     print(url);
-    final response = await http.get(url, headers: {
-      "Access-Control-Allow-Origin": "*",
-      'Content-Type': 'application/json',
-      'Accept': '*/*'
-    });
+    final response = await http.post(url,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
+        },
+        body: body);
     return response.body;
   }
 }

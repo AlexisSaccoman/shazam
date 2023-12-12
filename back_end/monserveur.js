@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 
 // opérations user --------------------------------------
 
-app.get('/register', async (req, res) => {
+app.post('/register', async (req, res) => {
     try {
         await userController.register(req, res);
     } catch (err) {
@@ -48,7 +48,7 @@ app.get('/register', async (req, res) => {
     }
 });
 
-app.get('/login', async (req, res) => {
+app.post('/login', async (req, res) => {
     try {
         await userController.login(req, res);
     } catch (err) {
@@ -57,34 +57,7 @@ app.get('/login', async (req, res) => {
     }
 });
 
-app.get('/findUserById', async (req, res) => {
-    try {
-        await userController.findUserById(req, res);
-    } catch (err) {
-        console.log('Erreur findUserById ! ' + err);
-        throw err;
-    }
-});
-
-app.get('/findUserByName', async (req, res) => {
-    try {
-        await userController.findUserByName(req, res);
-    } catch (err) {
-        console.log('Erreur findUserByName ! ' + err);
-        throw err;
-    }
-});
-
-app.get('/deleteUser', async (req, res) => {
-    try {
-        await userController.deleteUser(req, res);
-    } catch (err) {
-        console.log('Erreur deleteUser ! ' + err);
-        throw err;
-    }
-});
-
-app.get('/logout', async (req, res) => {
+app.post('/logout', async (req, res) => {
     try {
         await userController.logout(req, res);
     } catch (err) {
@@ -95,7 +68,7 @@ app.get('/logout', async (req, res) => {
 
 // opérations vin --------------------------------------
 
-app.get('/addVin', async (req, res) => {
+app.post('/addVin', async (req, res) => {
     try {
         await vinController.addVin(req, res);
     } catch (err) {
@@ -104,7 +77,7 @@ app.get('/addVin', async (req, res) => {
     }
 });
 
-app.get('/updateVin', async (req, res) => {
+app.post('/updateVin', async (req, res) => {
     try {
         await vinController.updateVin(req, res);
     } catch (err) {
@@ -113,7 +86,7 @@ app.get('/updateVin', async (req, res) => {
     }
 });
 
-app.get('/findVinByEAN', async (req, res) => {
+app.post('/findVinByEAN', async (req, res) => {
     try {
         await vinController.findVinByEAN(req, res);
     } catch (err) {
@@ -122,16 +95,7 @@ app.get('/findVinByEAN', async (req, res) => {
     }
 });
 
-app.get('/findVinByName', async (req, res) => {
-    try {
-        await vinController.findVinByName(req, res);
-    } catch (err) {
-        console.log('Erreur findVinByName ! ' + err);
-        throw err;
-    }
-});
-
-app.get('/deleteVin', async (req, res) => {
+app.post('/deleteVin', async (req, res) => {
     try {
         await vinController.deleteVin(req, res);
     } catch (err) {
@@ -140,7 +104,7 @@ app.get('/deleteVin', async (req, res) => {
     }
 });
 
-app.get('/findVins', async (req, res) => {
+app.post('/findVins', async (req, res) => {
     try {
         await vinController.findVins(req, res);
     } catch (err) {
@@ -152,7 +116,7 @@ app.get('/findVins', async (req, res) => {
 
 // opérations commentaire --------------------------------------
 
-app.get('/addCommentaire', async (req, res) => {
+app.post('/addCommentaire', async (req, res) => {
     try {
         await commentaireController.addCommentaire(req, res);
     } catch (err) {
@@ -161,7 +125,7 @@ app.get('/addCommentaire', async (req, res) => {
     }
 });
 
-app.get('/findCommentaireByVinName', async (req, res) => {
+app.post('/findCommentaireByVinName', async (req, res) => {
     try {
         await commentaireController.findCommentaireByVinName(req, res);
     } catch (err) {
@@ -170,7 +134,7 @@ app.get('/findCommentaireByVinName', async (req, res) => {
     }
 });
 
-app.get('/updateCommentaire', async (req, res) => {
+app.post('/updateCommentaire', async (req, res) => {
     try {
         await commentaireController.updateCommentaire(req, res);
     } catch (err) {
@@ -179,7 +143,7 @@ app.get('/updateCommentaire', async (req, res) => {
     }
 });
 
-app.get('/deleteCommentaire', async (req, res) => {
+app.post('/deleteCommentaire', async (req, res) => {
     try {
         await commentaireController.deleteCommentaire(req, res);
     } catch (err) {
@@ -190,7 +154,7 @@ app.get('/deleteCommentaire', async (req, res) => {
 
 // opérations note --------------------------------------
 
-app.get('/addNote', async (req, res) => {
+app.post('/addNote', async (req, res) => {
     try {
         await noteController.addNote(req,res);
     } catch (err) {
@@ -199,7 +163,7 @@ app.get('/addNote', async (req, res) => {
     }
 });
 
-app.get('/getMoyenneByVin', async (req, res) => {
+app.post('/getMoyenneByVin', async (req, res) => {
     try {
         await commentaireController.getMoyenneByVin(req,res);
     } catch (err) {
@@ -208,7 +172,7 @@ app.get('/getMoyenneByVin', async (req, res) => {
     }
 });
 
-app.get('/findNoteById', async (req, res) => {
+app.post('/findNoteById', async (req, res) => {
     try {
         await noteController.findNoteById(req,res);
     } catch (err) {
@@ -217,7 +181,7 @@ app.get('/findNoteById', async (req, res) => {
     }
 });
 
-app.get('/updateNote', async (req, res) => {
+app.post('/updateNote', async (req, res) => {
     try {
         await noteController.updateNote(req,res);
     } catch (err) {
@@ -226,7 +190,7 @@ app.get('/updateNote', async (req, res) => {
     }
 });
 
-app.get('/deleteNote', async (req, res) => {
+app.post('/deleteNote', async (req, res) => {
     try {
         await noteController.deleteNote(req,res);
     } catch (err) {

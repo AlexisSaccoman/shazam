@@ -5,12 +5,18 @@ const { ObjectId } = require('mongodb');
 
 exports.addCommentaire = async(req, res) => {
     try {
-        const { message, id, vin, note } = req.query;
+        const { message, id, vin, note } = req.body;
         
-        if(message == null || vin == null || id == null) {
-            res.status(400).send("Renseignez tous les champs !");
+        if(message == null || message.length == 0 || message == "null") {
+            res.status(400).send("Renseignez le message !");
             return false;
         }
+
+        if(note == null || note.length == 0 || note == "null") {
+            res.status(400).send("Renseignez la note !");
+            return false;
+        }
+        
         const d = new Date();
         const stringDate = d.toLocaleDateString() + " à " + d.toLocaleTimeString();
 
@@ -62,7 +68,7 @@ exports.addCommentaire = async(req, res) => {
 
 exports.findCommentaireByVinName = async(req, res) => {
     try {
-        const { nom } = req.query;
+        const { nom } = req.body;
 
         if(nom == null) {
             res.status(400).send("Renseignez le nom du vin !"); // vérification des champs
@@ -88,7 +94,7 @@ exports.findCommentaireByVinName = async(req, res) => {
 
 exports.updateCommentaire = async(req, res) => {
     try {
-        const { _id, message, note } = req.query;
+        const { _id, message, note } = req.body;
 
         const d = new Date();
         const date = d.toLocaleDateString() + " à " + d.toLocaleTimeString();
@@ -141,7 +147,7 @@ exports.updateCommentaire = async(req, res) => {
 
 exports.deleteCommentaire = async(req, res) => {
     try {
-        const { _id } = req.query;
+        const { _id } = req.body;
 
         if(_id == null) {
             res.status(400).send("Renseignez l'id du commentaire !"); // vérification des champs 
@@ -175,7 +181,7 @@ exports.deleteCommentaire = async(req, res) => {
 
 exports.getMoyenneByVin = async(req, res) => {
     try {
-        const { vin } = req.query;
+        const { vin } = req.body;
 
         if(vin == null) {
             res.status(400).send("Renseignez le vin !"); // vérification des champs 

@@ -3,7 +3,7 @@ const { ObjectId } = require('mongodb');
 
 exports.register = async(req, res) => {
     try {
-        const { id, mdp } = req.query;
+        const { id, mdp } = req.body;
 
         if(id == null || mdp == null || id.length == 0 || mdp.length == 0) {
             res.status(400).send("Renseignez tous les champs !");
@@ -29,7 +29,7 @@ exports.register = async(req, res) => {
 
 exports.login = async(req, res) => {
     try {
-        const { id, mdp } = req.query;
+        const { id, mdp } = req.body;
 
         if(id == null || mdp == null || id.length == 0 || mdp.length == 0) {
             res.status(400).send("Renseignez tous les champs !"); // vérification des champs
@@ -57,7 +57,7 @@ exports.login = async(req, res) => {
 
 exports.logout = async(req, res) => {
     try {
-        const { id } = req.query;
+        const { id } = req.body;
 
         if(id == null || id.length == 0) {
             res.status(400).send("Renseignez tous les champs !"); // vérification des champs
@@ -77,7 +77,7 @@ exports.logout = async(req, res) => {
 
 exports.findUserById = async(req, res) => {
     try {
-        const { _id } = req.query;
+        const { _id } = req.body;
 
         if(_id == null) {
             res.status(400).send("Renseignez l'id de l'utilisateur !"); // vérification des champs
@@ -111,7 +111,7 @@ exports.findUserById = async(req, res) => {
 
 exports.findUserByName = async(req, res) => {
     try {
-        const { name } = req.query;
+        const { name } = req.body;
 
         if(name == null) {
             res.status(400).send("Renseignez tous les champs !"); // vérification des champs
@@ -136,7 +136,7 @@ exports.findUserByName = async(req, res) => {
 
 exports.deleteUser = async(req, res) => {
     try {
-        const { id } = req.query;
+        const { id } = req.body;
 
         if(id == null) {
             res.status(400).send("Renseignez tous les champs !"); // vérification des champs 

@@ -5,7 +5,7 @@ const { ObjectId } = require('mongodb');
 
 exports.addNote = async(req, res) => {
     try {
-        const { nbEtoiles, vin, id } = req.query;
+        const { nbEtoiles, vin, id } = req.body;
         if(nbEtoiles == null || vin == null || id == null) {
             res.status(400).send("Renseignez tous les champs !"); // vérification des champs
             return false;
@@ -47,7 +47,7 @@ exports.addNote = async(req, res) => {
 
 exports.findNoteById = async(req, res) => {
     try {
-        const { _id } = req.query;
+        const { _id } = req.body;
 
         if(_id == null) {
             res.status(400).send("Renseignez l'id de la note !"); // vérification des champs
@@ -81,7 +81,7 @@ exports.findNoteById = async(req, res) => {
 
 exports.updateNote = async(req, res) => {
     try {
-        const { _id, nbEtoiles } = req.query;
+        const { _id, nbEtoiles } = req.body;
 
         if(_id == null) {
             res.status(400).send("Renseignez l'id de la note !"); // vérification des champs
@@ -125,7 +125,7 @@ exports.updateNote = async(req, res) => {
 
 exports.deleteNote = async(req, res) => {
     try {
-        const { _id } = req.query;
+        const { _id } = req.body;
 
         if(_id == null) {
             res.status(400).send("Renseignez l'id de la note !"); // vérification des champs 
