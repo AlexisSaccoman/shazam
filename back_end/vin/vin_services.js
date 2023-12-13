@@ -86,11 +86,7 @@ class vinService {
         }
     }
 
-    static async updateVin(nom, nouveauNom, descriptif, EAN, millesime, tarif, volume, cepage, allergenes, teneurEnAlcool, imgURL, nomDeDomaine, provenance, typeVin) {
-        const vin = await this.findVinByName(nom);
-        if(!vin) {
-            return "Vin non trouvé !";
-        }
+    static async updateVin(nom, nouveauNom, descriptif, millesime, tarif, volume, cepage, teneurEnAlcool, nomDeDomaine, provenance, typeVin) {
         const findDomaine = Domaine[nomDeDomaine];
         const findPays = Pays[provenance];
         const findType = TypeVin[typeVin];
@@ -112,20 +108,17 @@ class vinService {
             $set: {
                 nom: nouveauNom,
                 descriptif: descriptif,
-                EAN: EAN,
                 millesime: millesime,
                 tarif: tarif,
                 volume: volume,
                 cepage: cepage, 
-                allergenes: allergenes.split(","),
                 teneurEnAlcool: teneurEnAlcool,
-                imgURL: imgURL,
                 nomDeDomaine: findDomaine,
                 provenance: findPays,
                 typeVin: findType
             }
-        }).catch(() => {
-            console.log("Erreur dans l'update !");
+        }).catch((e) => {
+            console.log("Erreur dans l'update !" + e);
         });
     }
 

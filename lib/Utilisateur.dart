@@ -24,36 +24,33 @@ class Utilisateur {
     isAdmin = json['isAdmin'];
   }
 
-  static Future<List<Utilisateur>> getUtilisateurs() async {
-    var url = Uri.parse("https://pedago.univ-avignon.fr:3189/findUtilisateurs");
-    final response = await http.get(url, headers: {
-      "Access-Control-Allow-Origin": "*",
-      'Content-Type': 'application/json',
-      'Accept': '*/*'
-    });
-    final List body = json.decode(response.body);
-    return body.map((e) => Utilisateur.fromJson(e)).toList();
-  }
-
   static Future<String> login(id, mdp) async {
-    var url =
-        Uri.parse("https://pedago.univ-avignon.fr:3189/login?id=$id&mdp=$mdp");
-    final response = await http.get(url, headers: {
-      "Access-Control-Allow-Origin": "*",
-      'Content-Type': 'application/json',
-      'Accept': '*/*'
-    });
+    var url = Uri.parse("https://pedago.univ-avignon.fr:3189/login");
+    final response = await http.post(url,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
+        },
+        body: jsonEncode(<String, String>{
+          'id': id,
+          'mdp': mdp,
+        }));
     return response.body;
   }
 
   static Future<String> register(id, mdp) async {
-    var url = Uri.parse(
-        "https://pedago.univ-avignon.fr:3189/register?id=$id&mdp=$mdp");
-    final response = await http.get(url, headers: {
-      "Access-Control-Allow-Origin": "*",
-      'Content-Type': 'application/json',
-      'Accept': '*/*'
-    });
+    var url = Uri.parse("https://pedago.univ-avignon.fr:3189/register");
+    final response = await http.post(url,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
+        },
+        body: jsonEncode(<String, String>{
+          'id': id,
+          'mdp': mdp,
+        }));
     return response.body;
   }
 }

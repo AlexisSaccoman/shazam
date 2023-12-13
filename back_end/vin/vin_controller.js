@@ -3,7 +3,7 @@ const userService = require('../user/user_services');
 
 exports.addVin = async(req, res) => {
     try {
-        const { nom, descriptif, EAN, tarif, millesime, volume, cepage, allergenes, teneurEnAlcool, imgURL, nomDeDomaine, provenance, typeVin } = req.query;
+        const { nom, descriptif, EAN, tarif, millesime, volume, cepage, allergenes, teneurEnAlcool, imgURL, nomDeDomaine, provenance, typeVin } = req.body;
         if(nom == null || tarif == null || EAN == null || nom.length == 0 || tarif.length == 0 || EAN.length == 0) {
             res.status(400).send("Renseignez le nom, le tarif et l'EAN !");
             return false;
@@ -27,15 +27,15 @@ exports.addVin = async(req, res) => {
 
 exports.updateVin = async(req, res) => {
     try {
-        let { nom, nouveauNom, descriptif, EAN, tarif, millesime, volume, cepage, allergenes, teneurEnAlcool, imgURL, nomDeDomaine, provenance, typeVin } = req.query;
-        if(nom == null || tarif == null || EAN == null) {
-            res.status(400).send("Renseignez le nom, le tarif et l'EAN !");
+        let { nom, nouveauNom, descriptif, tarif, millesime, volume, cepage, teneurEnAlcool, nomDeDomaine, provenance, typeVin } = req.body;
+        if(nom == null || tarif == null) {
+            res.status(400).send("Renseignez le nom et le tarif!");
             return false;
         }
         if(nouveauNom == null) { // s'il n'y a pas de nouveau nom, on garde l'ancien
             nouveauNom = nom;
         }
-        const updateVin = await vinService.updateVin(nom, nouveauNom, descriptif, EAN, millesime, tarif, volume, cepage, allergenes, teneurEnAlcool, imgURL, nomDeDomaine, provenance, typeVin); // appel au service pour l'update du vin
+        const updateVin = await vinService.updateVin(nom, nouveauNom, descriptif, millesime, tarif, volume, cepage, teneurEnAlcool, nomDeDomaine, provenance, typeVin); // appel au service pour l'update du vin
 
         if(updateVin != "Vin non trouvé !" && updateVin != "Domaine incorrect !" && updateVin != "Pays incorrect !" && updateVin != "Type incorrect !" && updateVin != "Millesime incorrect !" ) { // verification des champs
             res.status(200).send('Vin modifié !');
@@ -54,7 +54,7 @@ exports.updateVin = async(req, res) => {
 
 exports.findVinByEAN = async(req, res) => {
     try {
-        const { ean } = req.query;
+        const { ean } = req.body;
 
         if(ean == null) {
             res.status(400).send("Renseignez l'EAN du vin !"); // vérification des champs
@@ -85,7 +85,7 @@ exports.findVinByEAN = async(req, res) => {
 
 exports.findVinByName = async(req, res) => {
     try {
-        const { nom } = req.query;
+        const { nom } = req.body;
 
         if(nom == null) {
             res.status(400).send("Renseignez le nom du vin !"); // vérification des champs
@@ -111,7 +111,7 @@ exports.findVinByName = async(req, res) => {
 
 exports.deleteVin = async(req, res) => {
     try {
-        const { nom } = req.query;
+        const { nom } = req.body;
 
         if(nom == null) {
             res.status(400).send("Renseignez le nom du vin !"); // vérification des champs 

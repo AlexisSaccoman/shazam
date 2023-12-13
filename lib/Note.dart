@@ -13,13 +13,16 @@ class Note {
   }
 
   static Future<dynamic> getNote(nomVin) async {
-    var url = Uri.parse(
-        "https://pedago.univ-avignon.fr:3189/getMoyenneByVin?vin=$nomVin");
-    final response = await http.get(url, headers: {
-      "Access-Control-Allow-Origin": "*",
-      'Content-Type': 'application/json',
-      'Accept': '*/*'
-    });
+    var url = Uri.parse("https://pedago.univ-avignon.fr:3189/getMoyenneByVin");
+    final response = await http.post(url,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
+        },
+        body: jsonEncode(<String, String>{
+          'vin': nomVin,
+        }));
     if (response.body != "Pas de note trouvée !") {
       return Note.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     }
