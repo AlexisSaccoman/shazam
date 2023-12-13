@@ -263,6 +263,10 @@ Liste de requêtes :
 
     https://pedago.univ-avignon.fr:3189/findVinByName?nom=Vin de Mirabelle
     
+    https://pedago.univ-avignon.fr:3189/findVinByEAN?ean=1234567891234
+
+    
+    
 - Commentaire : 
 
     pedago.univ-avignon.fr:3189/addCommentaire?message=Jesuisla&vin=Vin de Mirabelle&id=sneux

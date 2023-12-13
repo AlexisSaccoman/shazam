@@ -1,0 +1,195 @@
+PS C:\Program Files\apache-jmeter-5.6.2\bin> ./jmeter -n -t "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx" -l "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\résultats\10000-2-5.jtl"
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx
+Starting standalone test @ 2023 Dec 12 17:22:06 CET (1702398126296)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +    294 in 00:00:24 =   12.4/s Avg: 17664 Min: 13288 Max: 23453 Err:    47 (15.99%) Active: 10000 Started: 10000 Finished: 0
+summary +  22099 in 00:00:30 =  737.9/s Avg: 15874 Min:     0 Max: 52997 Err:  9806 (44.37%) Active: 9977 Started: 10000 Finished: 23
+summary =  22393 in 00:00:54 =  417.4/s Avg: 15898 Min:     0 Max: 52997 Err:  9853 (44.00%)
+summary +  16419 in 00:00:30 =  547.8/s Avg: 16573 Min:     0 Max: 80459 Err:  8544 (52.04%) Active: 6417 Started: 10000 Finished: 3583
+summary =  38812 in 00:01:24 =  464.1/s Avg: 16183 Min:     0 Max: 80459 Err: 18397 (47.40%)
+summary +   9851 in 00:00:30 =  328.1/s Avg: 21338 Min:     0 Max: 109932 Err:  2410 (24.46%) Active: 382 Started: 10000 Finished: 9618
+summary =  48663 in 00:01:54 =  428.2/s Avg: 17227 Min:     0 Max: 109932 Err: 20807 (42.76%)
+summary +    596 in 00:00:35 =   17.2/s Avg: 19473 Min:    28 Max: 136035 Err:   191 (32.05%) Active: 171 Started: 10000 Finished: 9829
+summary =  49259 in 00:02:28 =  332.0/s Avg: 17254 Min:     0 Max: 136035 Err: 20998 (42.63%)
+summary +    568 in 00:01:26 =    6.6/s Avg: 33133 Min:    28 Max: 198498 Err:   129 (22.71%) Active: 50 Started: 10000 Finished: 9950
+summary =  49827 in 00:03:55 =  212.3/s Avg: 17435 Min:     0 Max: 198498 Err: 21127 (42.40%)
+summary +      9 in 00:00:33 =    0.3/s Avg: 74534 Min:    29 Max: 226173 Err:     3 (33.33%) Active: 47 Started: 10000 Finished: 9953
+summary =  49836 in 00:04:28 =  186.1/s Avg: 17445 Min:     0 Max: 226173 Err: 21130 (42.40%)
+^CTerminer le programme de commandes (O/N) ? O
+
+
+PS C:\Program Files\apache-jmeter-5.6.2\bin> ./jmeter -n -t "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx" -l "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\résultats\10000-2-5.jtl"
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx
+Starting standalone test @ 2023 Dec 12 18:44:06 CET (1702403046600)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +   4853 in 00:00:53 =   90.9/s Avg: 39652 Min: 33523 Max: 51591 Err:  2371 (48.86%) Active: 145 Started: 5000 Finished: 4855
+summary +    147 in 00:00:40 =    3.6/s Avg: 55138 Min: 49629 Max: 92509 Err:     0 (0.00%) Active: 0 Started: 5000 Finished: 5000
+summary =   5000 in 00:01:34 =   53.4/s Avg: 40107 Min: 33523 Max: 92509 Err:  2371 (47.42%)
+Tidying up ...    @ 2023 Dec 12 18:45:40 CET (1702403140312)
+... end of run
+
+
+
+PS C:\Program Files\apache-jmeter-5.6.2\bin> ./jmeter -n -t "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx" -l "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\résultats\10000-2-5.jtl"
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx
+Starting standalone test @ 2023 Dec 12 18:47:45 CET (1702403265101)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary =    500 in 00:00:05 =   97.6/s Avg:  3278 Min:  2746 Max:  3852 Err:     0 (0.00%)
+Tidying up ...    @ 2023 Dec 12 18:47:50 CET (1702403270289)
+... end of run
+
+
+
+PS C:\Program Files\apache-jmeter-5.6.2\bin> ./jmeter -n -t "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx" -l "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\résultats\10000-2-5.jtl"
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx
+Starting standalone test @ 2023 Dec 12 18:50:56 CET (1702403456185)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +      1 in 00:00:06 =    0.2/s Avg:  6149 Min:  6149 Max:  6149 Err:     0 (0.00%) Active: 1000 Started: 1000 Finished: 0
+summary +    999 in 00:00:07 =  137.9/s Avg: 10152 Min:  6141 Max: 12559 Err:     0 (0.00%) Active: 0 Started: 1000 Finished: 1000
+summary =   1000 in 00:00:14 =   73.7/s Avg: 10148 Min:  6141 Max: 12559 Err:     0 (0.00%)
+Tidying up ...    @ 2023 Dec 12 18:51:09 CET (1702403469825)
+... end of run
+
+
+
+PS C:\Program Files\apache-jmeter-5.6.2\bin> ./jmeter -n -t "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx" -l "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\résultats\10000-2-5.jtl"
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx
+Starting standalone test @ 2023 Dec 12 18:52:23 CET (1702403543566)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +      1 in 00:00:09 =    0.1/s Avg:  8659 Min:  8659 Max:  8659 Err:     0 (0.00%) Active: 1500 Started: 1500 Finished: 0
+summary +   1499 in 00:00:10 =  155.1/s Avg: 13319 Min:  8593 Max: 18058 Err:     0 (0.00%) Active: 0 Started: 1500 Finished: 1500
+summary =   1500 in 00:00:19 =   81.0/s Avg: 13316 Min:  8593 Max: 18058 Err:     0 (0.00%)
+Tidying up ...    @ 2023 Dec 12 18:52:42 CET (1702403562144)
+... end of run
+
+
+
+PS C:\Program Files\apache-jmeter-5.6.2\bin> ./jmeter -n -t "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx" -l "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\résultats\10000-2-5.jtl"
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx
+Starting standalone test @ 2023 Dec 12 18:53:10 CET (1702403590437)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +    769 in 00:00:20 =   38.6/s Avg: 17581 Min: 14883 Max: 19081 Err:     0 (0.00%) Active: 1730 Started: 2500 Finished: 770
+summary +   1731 in 00:00:15 =  113.7/s Avg: 23455 Min: 18250 Max: 33300 Err:     4 (0.23%) Active: 0 Started: 2500 Finished: 2500
+summary =   2500 in 00:00:35 =   71.2/s Avg: 21648 Min: 14883 Max: 33300 Err:     4 (0.16%)
+Tidying up ...    @ 2023 Dec 12 18:53:45 CET (1702403625636)
+... end of run
+
+
+
+PS C:\Program Files\apache-jmeter-5.6.2\bin> ./jmeter -n -t "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx" -l "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\résultats\10000-2-5.jtl"
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx
+Starting standalone test @ 2023 Dec 12 18:54:10 CET (1702403650309)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +    114 in 00:00:20 =    5.7/s Avg: 17818 Min: 16969 Max: 18865 Err:     0 (0.00%) Active: 2887 Started: 3000 Finished: 113
+summary +   2605 in 00:00:30 =   87.9/s Avg: 32530 Min: 18545 Max: 49079 Err:   657 (25.22%) Active: 282 Started: 3000 Finished: 2718
+summary =   2719 in 00:00:50 =   54.8/s Avg: 31913 Min: 16969 Max: 49079 Err:   657 (24.16%)
+summary +    281 in 00:00:28 =   10.0/s Avg: 51238 Min: 46690 Max: 76297 Err:     0 (0.00%) Active: 0 Started: 3000 Finished: 3000
+summary =   3000 in 00:01:18 =   38.6/s Avg: 33723 Min: 16969 Max: 76297 Err:   657 (21.90%)
+Tidying up ...    @ 2023 Dec 12 18:55:28 CET (1702403728088)
+... end of run
+
+
+
+PS C:\Program Files\apache-jmeter-5.6.2\bin> ./jmeter -n -t "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx" -l "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\résultats\10000-2-5.jtl"
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx
+Starting standalone test @ 2023 Dec 12 18:57:39 CET (1702403859196)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +    517 in 00:00:21 =   24.9/s Avg: 18131 Min: 13790 Max: 20489 Err:     0 (0.00%) Active: 2083 Started: 2600 Finished: 517
+summary +   2083 in 00:00:24 =   87.4/s Avg: 24960 Min: 18682 Max: 42156 Err:   204 (9.79%) Active: 0 Started: 2600 Finished: 2600
+summary =   2600 in 00:00:45 =   58.2/s Avg: 23602 Min: 13790 Max: 42156 Err:   204 (7.85%)
+Tidying up ...    @ 2023 Dec 12 18:58:23 CET (1702403903903)
+... end of run
+
+
+
+PS C:\Program Files\apache-jmeter-5.6.2\bin> ./jmeter -n -t "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx" -l "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\résultats\10000-2-5.jtl"
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx
+Starting standalone test @ 2023 Dec 12 18:58:39 CET (1702403919786)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +    377 in 00:00:20 =   18.7/s Avg: 18462 Min: 15521 Max: 19686 Err:     0 (0.00%) Active: 2134 Started: 2510 Finished: 376
+summary +   2133 in 00:00:23 =   92.1/s Avg: 22526 Min: 18171 Max: 41859 Err:   106 (4.97%) Active: 0 Started: 2510 Finished: 2510
+summary =   2510 in 00:00:43 =   58.0/s Avg: 21916 Min: 15521 Max: 41859 Err:   106 (4.22%)
+Tidying up ...    @ 2023 Dec 12 18:59:23 CET (1702403963157)
+... end of run
+
+
+
+PS C:\Program Files\apache-jmeter-5.6.2\bin> ./jmeter -n -t "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx" -l "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\résultats\10000-2-5.jtl"
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx
+Starting standalone test @ 2023 Dec 12 18:59:42 CET (1702403982271)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +   1335 in 00:00:18 =   75.6/s Avg: 14688 Min: 11048 Max: 16568 Err:     0 (0.00%) Active: 1168 Started: 2505 Finished: 1337
+summary +   1170 in 00:00:06 =  210.1/s Avg: 17515 Min: 15479 Max: 22139 Err:     0 (0.00%) Active: 0 Started: 2505 Finished: 2505
+summary =   2505 in 00:00:23 =  107.8/s Avg: 16008 Min: 11048 Max: 22139 Err:     0 (0.00%)
+Tidying up ...    @ 2023 Dec 12 19:00:05 CET (1702404005572)
+... end of run
+
+
+
+PS C:\Program Files\apache-jmeter-5.6.2\bin> ./jmeter -n -t "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx" -l "C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\résultats\10000-2-5.jtl"
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using C:\Users\Alexis\Documents\files\Cours\master\Semestre 7\UE Urbanisation\shazam\rapport-SACCOMAN-MEDOUAZ\tests montée en charge\Test Montée en Charge - ShazaMurge.jmx
+Starting standalone test @ 2023 Dec 12 19:01:18 CET (1702404078868)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +      8 in 00:00:13 =    0.6/s Avg: 10235 Min:  9148 Max: 12365 Err:     0 (0.00%) Active: 2493 Started: 2507 Finished: 14
+summary +   2497 in 00:00:32 =   77.2/s Avg: 20353 Min: 11855 Max: 42420 Err:    44 (1.76%) Active: 3 Started: 2507 Finished: 2504
+summary =   2505 in 00:00:45 =   55.8/s Avg: 20321 Min:  9148 Max: 42420 Err:    44 (1.76%)
+summary +      2 in 00:00:00 =   40.8/s Avg: 42815 Min: 42707 Max: 42924 Err:     0 (0.00%) Active: 0 Started: 2507 Finished: 2507
+summary =   2507 in 00:00:45 =   55.8/s Avg: 20339 Min:  9148 Max: 42924 Err:    44 (1.76%)
+Tidying up ...    @ 2023 Dec 12 19:02:03 CET (1702404123854)
+... end of run
+PS C:\Program Files\apache-jmeter-5.6.2\bin>
